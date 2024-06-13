@@ -18,6 +18,9 @@ enum ViewConstant {
         static let bold14 = UIFont.boldSystemFont(ofSize: 14)
         static let bold15 = UIFont.boldSystemFont(ofSize: 15)
         static let bold16  = UIFont.boldSystemFont(ofSize: 16)
+        
+        static let heavy15 = UIFont.systemFont(ofSize: 15, weight: .heavy)
+        static let heavy16  = UIFont.systemFont(ofSize: 16, weight: .heavy)
     }
     
     enum BorderWidth {
