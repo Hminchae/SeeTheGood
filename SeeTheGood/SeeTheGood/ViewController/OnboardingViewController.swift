@@ -29,12 +29,14 @@ final class OnboardingViewController: UIViewController {
         return imageView
     }()
     
-    private let startButton = {
+    // 커스텀 버튼 만들기
+    lazy private var startButton = {
         let button = UIButton()
         button.setTitle("시작하기", for: .normal)
         button.titleLabel?.font = ViewConstant.Font.heavy16
-        button.layer.cornerRadius = 25
+        button.layer.cornerRadius = ViewConstant.Radius.orangeButton
         button.backgroundColor = .point
+        button.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
         
         return button
     }()
@@ -56,7 +58,7 @@ final class OnboardingViewController: UIViewController {
     
     private func configureLayout() {
         appNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(85)
+            make.top.equalTo(view.snp.top).offset(145)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(55)
             make.height.equalTo(60)
         }
@@ -71,6 +73,12 @@ final class OnboardingViewController: UIViewController {
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(15)
             make.height.equalTo(50)
         }
+    }
+    
+    @objc private func startButtonClicked() {
+        let vc = ProfileSettingViewController()
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

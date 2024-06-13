@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SeeTheGood" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QL-Fp-pFK">
-                                <rect key="frame" x="55" y="144" width="283" height="60"/>
+                                <rect key="frame" x="55" y="145" width="283" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Vcs-K1-lUn"/>
                                 </constraints>
@@ -30,7 +30,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="Tey-Df-zIg">
                                 <rect key="frame" x="21.666666666666657" y="294.33333333333337" width="350" height="263.33333333333337"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="김새싹" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Giv-VU-k8w">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="황민채" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Giv-VU-k8w">
                                 <rect key="frame" x="75" y="587.66666666666663" width="243" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Hdw-f7-Njj"/>
@@ -50,7 +50,7 @@
                             <constraint firstItem="1QL-Fp-pFK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="55" id="XEF-hq-HOA"/>
                             <constraint firstItem="Giv-VU-k8w" firstAttribute="top" secondItem="Tey-Df-zIg" secondAttribute="bottom" constant="30" id="aZw-Ok-tgn"/>
                             <constraint firstItem="Tey-Df-zIg" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="hqy-wJ-rXy"/>
-                            <constraint firstItem="1QL-Fp-pFK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="85" id="hyk-ev-21S"/>
+                            <constraint firstItem="1QL-Fp-pFK" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="145" id="hyk-ev-21S"/>
                         </constraints>
                     </view>
                 </viewController>

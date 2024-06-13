@@ -27,4 +27,8 @@ enum ViewConstant {
         static let selectedProfile = 3
         static let unSelectedProfile = 1
     }
+    
+    enum Radius {
+        static let orangeButton: CGFloat = 25
+    }
 }
