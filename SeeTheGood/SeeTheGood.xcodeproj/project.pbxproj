@@ -31,6 +31,7 @@
 		B1642DCF2C1C728F003032F9 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DCE2C1C728F003032F9 /* SearchTableViewCell.swift */; };
 		B1642DD22C1C8F37003032F9 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DD12C1C8F37003032F9 /* Search.swift */; };
 		B1642DD42C1C9354003032F9 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DD32C1C9354003032F9 /* SearchResultViewController.swift */; };
+		B1642DD72C1CA54D003032F9 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DD62C1CA54D003032F9 /* LineView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		B1642DCE2C1C728F003032F9 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		B1642DD12C1C8F37003032F9 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		B1642DD32C1C9354003032F9 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
+		B1642DD62C1CA54D003032F9 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				B1642DB92C1B1167003032F9 /* OrangeButton.swift */,
+				B1642DD62C1CA54D003032F9 /* LineView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				B1642DA82C1AF9B4003032F9 /* APIKey.swift in Sources */,
 				B1642DCF2C1C728F003032F9 /* SearchTableViewCell.swift in Sources */,
 				B1642DB82C1B0F76003032F9 /* ProfileSettingViewController.swift in Sources */,
+				B1642DD72C1CA54D003032F9 /* LineView.swift in Sources */,
 				B1642DC02C1BF123003032F9 /* SearchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

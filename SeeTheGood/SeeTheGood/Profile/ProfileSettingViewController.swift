@@ -24,12 +24,7 @@ final class ProfileSettingViewController: UIViewController {
         }
     }
     
-    private let lineView = {
-        let view = UIView()
-        view.backgroundColor = .thirdGray
-        
-        return view
-    }()
+    private let lineView = LineView()
     
     lazy private var profileImageView = {
         let imageView = UIImageView()

@@ -30,12 +30,7 @@ class SearchViewController: UIViewController {
         return searchBar
     }()
     
-    private let topLineView = {
-        let view = UIView()
-        view.backgroundColor = .thirdGray
-        
-        return view
-    }()
+    private let topLineView = LineView()
     
     private let emptyView = UIView()
     
@@ -78,12 +73,7 @@ class SearchViewController: UIViewController {
     
     private let tableView = UITableView()
     
-    private let bottomLineView = {
-        let view = UIView()
-        view.backgroundColor = .thirdGray
-        
-        return view
-    }()
+    private let bottomLineView = LineView()
     
     var responseList = Search(lastBuildDate: "",
                               total: 0,

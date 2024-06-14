@@ -14,12 +14,7 @@ final class ProfileImageSettingViewController: UIViewController {
     var selectedImageNum: Int? = nil
     var onImageSelect: ((Int) -> Void)?
     
-    private let lineView = {
-        let view = UIView()
-        view.backgroundColor = .thirdGray
-        
-        return view
-    }()
+    private let lineView = LineView()
     
     lazy private var profileImageView = {
         let imageView = UIImageView()

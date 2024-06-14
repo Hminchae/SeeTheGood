@@ -12,12 +12,13 @@ class SearchResultViewController: UIViewController {
     var searchWord: String?
     var searchResult: Search?
     
+    private let lineView = LineView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationBar()
+        view.backgroundColor = .white
         
-        view.backgroundColor = .green
-        print(searchResult ?? "아직 안 왔음")
+        configureNavigationBar()
     }
     
     func configureNavigationBar() {
