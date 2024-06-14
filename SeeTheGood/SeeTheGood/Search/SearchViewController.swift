@@ -256,13 +256,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let target = list.reversed()[indexPath.row]
         let vc = SearchResultViewController()
         
-        Task {
-            if let value = await callRequest(query: target) {
-                responseList = value
-            }
-            vc.searchWord = target
-            vc.searchResult = responseList
-            navigationController?.pushViewController(vc, animated: true)
-        }
+        vc.searchWord = target
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
