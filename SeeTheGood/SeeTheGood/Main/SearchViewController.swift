@@ -8,6 +8,7 @@
 import UIKit
 
 import SnapKit
+import Alamofire
 
 class SearchViewController: UIViewController {
     
@@ -93,6 +94,8 @@ class SearchViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.identifier)
         tableView.separatorStyle = .none
+        
+        searchBar.delegate = self
         
         configureView()
     }
@@ -184,7 +187,44 @@ class SearchViewController: UIViewController {
     }
 }
 
+// 네트워크
+extension SearchViewController {
+    
+    func callRequest(query: String) {
+        let url = "\(APIKey.url.rawValue)?query=\(query)"
+        let header: HTTPHeaders = [
+            "X-Naver-Client-Id": APIKey.clientID.rawValue,
+            "X-Naver-Client-Secret": APIKey.clientSecret.rawValue
+        ]
+        
+        AF.request(url,
+                   method: .get,
+                   headers: header)
+        .responseDecodable(of: Search.self) { response in
+            switch response.result {
+            case .success(let value):
+                print("SUCCESS")
+                print(response)
+            case .failure(let error):
+                print("Failed")
+                print(error)
+            }
+        }
+    }
+}
+
+extension SearchViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text else { return }
+        callRequest(query: text)
+        list.append(text)
+        tableView.reloadData()
+    }
+}
+
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         list.count
     }
@@ -192,10 +232,17 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as! SearchTableViewCell
         
-        cell.searchRecordLabel.text = list[indexPath.row]
+        cell.searchRecordLabel.text = list.reversed()[indexPath.row]
         
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        defer {
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+        
+        print("힝")
+    }
 }

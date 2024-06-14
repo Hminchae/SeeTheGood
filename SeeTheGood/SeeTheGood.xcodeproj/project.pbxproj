@@ -29,6 +29,7 @@
 		B1642DCB2C1C5740003032F9 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DCA2C1C5740003032F9 /* MainTabBarViewController.swift */; };
 		B1642DCD2C1C584A003032F9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DCC2C1C584A003032F9 /* SettingViewController.swift */; };
 		B1642DCF2C1C728F003032F9 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DCE2C1C728F003032F9 /* SearchTableViewCell.swift */; };
+		B1642DD22C1C8F37003032F9 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DD12C1C8F37003032F9 /* Search.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		B1642DCA2C1C5740003032F9 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		B1642DCC2C1C584A003032F9 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		B1642DCE2C1C728F003032F9 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		B1642DD12C1C8F37003032F9 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 		B1642DA22C1AF569003032F9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B1642DD12C1C8F37003032F9 /* Search.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				B1642D8E2C1AF24C003032F9 /* OnboardingViewController.swift in Sources */,
 				B1642D8A2C1AF24C003032F9 /* AppDelegate.swift in Sources */,
 				B1642DCB2C1C5740003032F9 /* MainTabBarViewController.swift in Sources */,
+				B1642DD22C1C8F37003032F9 /* Search.swift in Sources */,
 				B1642DBA2C1B1167003032F9 /* OrangeButton.swift in Sources */,
 				B1642DCD2C1C584A003032F9 /* SettingViewController.swift in Sources */,
 				B1642DBC2C1BDF9D003032F9 /* ProfileImageSettingViewController.swift in Sources */,
