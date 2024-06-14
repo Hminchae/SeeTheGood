@@ -34,7 +34,7 @@ class SearchResultViewController: UIViewController {
     private let sortStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 0
+        stackView.spacing = 8
         stackView.distribution = .equalSpacing
         stackView.alignment = .center
         
@@ -45,43 +45,25 @@ class SearchResultViewController: UIViewController {
     
     func selectedButtonSet(_ title: String) -> UIButton {
         let button = UIButton()
-        var config = UIButton.Configuration.filled()
-        
-        config.baseBackgroundColor = .clear
-        config.attributedTitle = selectedTitleAttribute(title)
-        
         button.layer.cornerRadius = 15
         button.backgroundColor = .firstGray
-        button.configuration = config
+        button.setTitle(title, for: .normal)
+        button.titleLabel?.font = ViewConstant.Font.normal14
         
         return button
     }
     
     func unSelectedButtonSet(_ title: String) -> UIButton {
         let button = UIButton()
-        var config = UIButton.Configuration.filled()
-        
-        config.baseBackgroundColor = .clear
-        config.attributedTitle = unSelectedTitleAttribute(title)
-        
+        button.backgroundColor = .white
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = ViewConstant.Font.normal14
         button.layer.borderColor = UIColor.thirdGray.cgColor
-        button.titleLabel?.numberOfLines = 1
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 15
-        button.backgroundColor = .white
-        button.configuration = config
         
         return button
-    }
-    
-    func selectedTitleAttribute(_ title: String) -> AttributedString {
-        let attributes = AttributedString(title, attributes: AttributeContainer([.font: ViewConstant.Font.normal14, .foregroundColor: UIColor.white]))
-        return attributes
-    }
-    
-    func unSelectedTitleAttribute(_ title: String) -> AttributedString {
-        let attributes = AttributedString(title, attributes: AttributeContainer([.font: ViewConstant.Font.normal14, .foregroundColor: UIColor.black]))
-        return attributes
     }
     
     lazy private var sortDateButton = unSelectedButtonSet("날짜순")
@@ -121,7 +103,7 @@ class SearchResultViewController: UIViewController {
         sortStackView.snp.makeConstraints { make in
             make.top.equalTo(totalSearchResultLabel.snp.bottom).offset(10)
             make.leading.equalTo(view.snp.leading).offset(15)
-            make.trailing.equalTo(view.snp.trailing).inset(40)
+            make.trailing.lessThanOrEqualTo(view.snp.trailing).inset(UIScreen.main.bounds.width - 310)
             make.height.equalTo(30)
         }
     }
@@ -143,6 +125,22 @@ class SearchResultViewController: UIViewController {
         sortStackView.addArrangedSubview(sortDateButton)
         sortStackView.addArrangedSubview(sortDscButton)
         sortStackView.addArrangedSubview(sortAscButton)
+        
+        sortSimButton.snp.makeConstraints { make in
+            make.width.equalTo(55)
+        }
+        
+        sortDateButton.snp.makeConstraints { make in
+            make.width.equalTo(55)
+        }
+        
+        sortDscButton.snp.makeConstraints { make in
+            make.width.equalTo(80)
+        }
+        
+        sortAscButton.snp.makeConstraints { make in
+            make.width.equalTo(80)
+        }
     }
 }
 

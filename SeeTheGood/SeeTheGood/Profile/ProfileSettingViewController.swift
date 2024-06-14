@@ -190,8 +190,7 @@ final class ProfileSettingViewController: UIViewController {
                 let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
                 let sceneDelegate = windowScene?.delegate as? SceneDelegate
                 
-                let vc = UINavigationController(rootViewController: MainTabBarViewController())
-                sceneDelegate?.window?.rootViewController = vc
+                sceneDelegate?.window?.rootViewController = MainTabBarViewController()
                 sceneDelegate?.window?.makeKeyAndVisible()
             }
         }
