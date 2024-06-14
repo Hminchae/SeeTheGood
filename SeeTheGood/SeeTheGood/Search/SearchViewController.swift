@@ -13,7 +13,7 @@ import Alamofire
 class SearchViewController: UIViewController {
     
     private let user = UserDefaultManager.shared
-    private var list: [String] = ["냠냠", "쩝쩝", "배고파롱"]
+    private var list: [String] = ["사과", "바나나", "용과"]
     
     private let searchTextField = {
         let textField = UITextField()
@@ -85,6 +85,12 @@ class SearchViewController: UIViewController {
         return view
     }()
     
+    var responseList = Search(lastBuildDate: "",
+                              total: 0,
+                              start: 0,
+                              display: 0,
+                              items: [])
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "\(user.nickName)'s See The Good"
@@ -94,10 +100,21 @@ class SearchViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.identifier)
         tableView.separatorStyle = .none
+        tableView.rowHeight = 40
         
         searchBar.delegate = self
         
         configureView()
+        
+        navigationItem.backButtonTitle = ""
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        responseList = Search(lastBuildDate: "",
+                              total: 0,
+                              start: 0,
+                              display: 0,
+                              items: [])
     }
     
     private func configureView() {
@@ -113,7 +130,7 @@ class SearchViewController: UIViewController {
         view.addSubview(bottomLineView)
         configureLayout()
     }
-
+    
     private func configureLayout() {
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
@@ -190,25 +207,22 @@ class SearchViewController: UIViewController {
 // 네트워크
 extension SearchViewController {
     
-    func callRequest(query: String) {
+    func callRequest(query: String) async -> Search? {
         let url = "\(APIKey.url.rawValue)?query=\(query)"
         let header: HTTPHeaders = [
             "X-Naver-Client-Id": APIKey.clientID.rawValue,
             "X-Naver-Client-Secret": APIKey.clientSecret.rawValue
         ]
         
-        AF.request(url,
-                   method: .get,
-                   headers: header)
-        .responseDecodable(of: Search.self) { response in
-            switch response.result {
-            case .success(let value):
-                print("SUCCESS")
-                print(response)
-            case .failure(let error):
-                print("Failed")
-                print(error)
-            }
+        do {
+            let response = try await AF.request(url,
+                                                method: .get,
+                                                headers: header)
+                .serializingDecodable(Search.self).value
+            return response
+        } catch {
+            print("네트워크 오류")
+            return nil
         }
     }
 }
@@ -217,9 +231,15 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text else { return }
-        callRequest(query: text)
-        list.append(text)
-        tableView.reloadData()
+        
+        Task {
+            if let value = await callRequest(query: text) {
+                responseList = value
+            }
+            list.append(text)
+            tableView.reloadData()
+            print(responseList)
+        }
     }
 }
 
@@ -243,6 +263,16 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }
         
-        print("힝")
+        let target = list.reversed()[indexPath.row]
+        let vc = SearchResultViewController()
+        
+        Task {
+            if let value = await callRequest(query: target) {
+                responseList = value
+            }
+            vc.searchWord = target
+            vc.searchResult = responseList
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }

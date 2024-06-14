@@ -30,6 +30,7 @@
 		B1642DCD2C1C584A003032F9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DCC2C1C584A003032F9 /* SettingViewController.swift */; };
 		B1642DCF2C1C728F003032F9 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DCE2C1C728F003032F9 /* SearchTableViewCell.swift */; };
 		B1642DD22C1C8F37003032F9 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DD12C1C8F37003032F9 /* Search.swift */; };
+		B1642DD42C1C9354003032F9 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DD32C1C9354003032F9 /* SearchResultViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		B1642DCC2C1C584A003032F9 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		B1642DCE2C1C728F003032F9 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		B1642DD12C1C8F37003032F9 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
+		B1642DD32C1C9354003032F9 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,9 +94,11 @@
 			children = (
 				B1642D8B2C1AF24C003032F9 /* SceneDelegate.swift */,
 				B1642D892C1AF24C003032F9 /* AppDelegate.swift */,
+				B1642DCA2C1C5740003032F9 /* MainTabBarViewController.swift */,
 				B1642DC12C1BF1E6003032F9 /* Resource */,
 				B1642D9E2C1AF4F4003032F9 /* Profile */,
-				B1642DC92C1C43AF003032F9 /* Main */,
+				B1642DD52C1C9361003032F9 /* Setting */,
+				B1642DC92C1C43AF003032F9 /* Search */,
 				B1642D922C1AF24E003032F9 /* Assets.xcassets */,
 				B1642D942C1AF24E003032F9 /* LaunchScreen.storyboard */,
 				B1642D972C1AF24E003032F9 /* Info.plist */,
@@ -175,15 +179,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		B1642DC92C1C43AF003032F9 /* Main */ = {
+		B1642DC92C1C43AF003032F9 /* Search */ = {
 			isa = PBXGroup;
 			children = (
 				B1642DD02C1C7296003032F9 /* Cell */,
 				B1642DBF2C1BF123003032F9 /* SearchViewController.swift */,
-				B1642DCA2C1C5740003032F9 /* MainTabBarViewController.swift */,
-				B1642DCC2C1C584A003032F9 /* SettingViewController.swift */,
+				B1642DD32C1C9354003032F9 /* SearchResultViewController.swift */,
 			);
-			path = Main;
+			path = Search;
 			sourceTree = "<group>";
 		};
 		B1642DD02C1C7296003032F9 /* Cell */ = {
@@ -192,6 +195,14 @@
 				B1642DCE2C1C728F003032F9 /* SearchTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		B1642DD52C1C9361003032F9 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				B1642DCC2C1C584A003032F9 /* SettingViewController.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,6 +297,7 @@
 				B1642DBC2C1BDF9D003032F9 /* ProfileImageSettingViewController.swift in Sources */,
 				B1642DC52C1C1D5C003032F9 /* ReuseIdentifierProtocol.swift in Sources */,
 				B1642DA42C1AF5EB003032F9 /* ViewConstant.swift in Sources */,
+				B1642DD42C1C9354003032F9 /* SearchResultViewController.swift in Sources */,
 				B1642D8C2C1AF24C003032F9 /* SceneDelegate.swift in Sources */,
 				B1642DC32C1BF20B003032F9 /* UserDefaultManager.swift in Sources */,
 				B1642DC82C1C1E4A003032F9 /* ProfileImageCollectionViewCell.swift in Sources */,
