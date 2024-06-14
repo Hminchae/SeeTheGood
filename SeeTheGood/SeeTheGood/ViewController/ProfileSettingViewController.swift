@@ -15,7 +15,7 @@ final class ProfileSettingViewController: UIViewController {
     private let lineView = {
         let view = UIView()
         view.backgroundColor = .thirdGray
-
+        
         return view
     }()
     
@@ -34,7 +34,7 @@ final class ProfileSettingViewController: UIViewController {
         return imageView
     }()
     
-    lazy private var cameraButton = {
+    private var cameraButton = {
         let button = UIButton()
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 13, weight: .medium)
         button.backgroundColor = .point
@@ -51,8 +51,8 @@ final class ProfileSettingViewController: UIViewController {
         textField.borderStyle = .none
         textField.textAlignment = .left
         textField.textColor = .black
-        textField.tintColor = .firstGray
         textField.font = ViewConstant.Font.bold15
+        textField.setPlaceholderColor(.lightGray)
         
         return textField
     }()
@@ -133,7 +133,7 @@ final class ProfileSettingViewController: UIViewController {
     
     private func addBottomBorderToTextField(textField: UITextField) {
         let border = CALayer()
-        border.frame = CGRect(x: 0, 
+        border.frame = CGRect(x: 0,
                               y: textField.frame.size.height - 1,
                               width: textField.frame.width,
                               height: 1)
@@ -142,8 +142,6 @@ final class ProfileSettingViewController: UIViewController {
     }
     
     @objc private func profileImageClicked() {
-        cameraButton.tintColor = .secondGray
-        
         let vc = ProfileImageSettingViewController()
         vc.selectedImageNum = selectedImageNum
         navigationController?.pushViewController(vc, animated: true)

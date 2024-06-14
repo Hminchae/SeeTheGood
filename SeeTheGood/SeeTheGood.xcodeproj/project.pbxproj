@@ -21,6 +21,7 @@
 		B1642DB82C1B0F76003032F9 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DB72C1B0F76003032F9 /* ProfileSettingViewController.swift */; };
 		B1642DBA2C1B1167003032F9 /* OrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DB92C1B1167003032F9 /* OrangeButton.swift */; };
 		B1642DBC2C1BDF9D003032F9 /* ProfileImageSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DBB2C1BDF9D003032F9 /* ProfileImageSettingViewController.swift */; };
+		B1642DBE2C1BEA45003032F9 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DBD2C1BEA45003032F9 /* UITextField+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		B1642DB72C1B0F76003032F9 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 		B1642DB92C1B1167003032F9 /* OrangeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrangeButton.swift; sourceTree = "<group>"; };
 		B1642DBB2C1BDF9D003032F9 /* ProfileImageSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSettingViewController.swift; sourceTree = "<group>"; };
+		B1642DBD2C1BEA45003032F9 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 		B1642DA12C1AF554003032F9 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				B1642DBD2C1BEA45003032F9 /* UITextField+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1642DBE2C1BEA45003032F9 /* UITextField+Extension.swift in Sources */,
 				B1642D8E2C1AF24C003032F9 /* OnboardingViewController.swift in Sources */,
 				B1642D8A2C1AF24C003032F9 /* AppDelegate.swift in Sources */,
 				B1642DBA2C1B1167003032F9 /* OrangeButton.swift in Sources */,
