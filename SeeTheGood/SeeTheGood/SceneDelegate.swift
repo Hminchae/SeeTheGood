@@ -20,11 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         
         if data {
-            let rootViewController = UINavigationController(rootViewController: MainViewController())
-            window?.rootViewController = rootViewController
+            let vc =  MainTabBarViewController()
+            window?.rootViewController = vc
         } else {
-            let rootViewController = UINavigationController(rootViewController: ProfileSettingViewController())
-            window?.rootViewController = rootViewController
+            let vc = UINavigationController(rootViewController: ProfileSettingViewController())
+            window?.rootViewController = vc
         }
         
         window?.makeKeyAndVisible()
