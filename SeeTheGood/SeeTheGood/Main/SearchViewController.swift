@@ -11,7 +11,8 @@ import SnapKit
 
 class SearchViewController: UIViewController {
     
-    let user = UserDefaultManager.shared
+    private let user = UserDefaultManager.shared
+    private var list: [String] = ["냠냠"]
     
     private let searchTextField = {
         let textField = UITextField()
@@ -54,6 +55,28 @@ class SearchViewController: UIViewController {
         return label
     }()
     
+    private let notEmptyView = UIView()
+    
+    private let recentSearchLabel = {
+        let label = UILabel()
+        label.text = "최근 검색"
+        label.textColor = .black
+        label.font = ViewConstant.Font.bold15
+        
+        return label
+    }()
+    
+    private let deleteAllButton = {
+        let button = UIButton()
+        button.setTitle("전체 삭제", for: .normal)
+        button.setTitleColor(.point, for: .normal)
+        button.titleLabel?.font = ViewConstant.Font.normal13
+        
+        return button
+    }()
+    
+    private let tableView = UITableView()
+    
     private let bottomLineView = {
         let view = UIView()
         view.backgroundColor = .thirdGray
@@ -69,17 +92,21 @@ class SearchViewController: UIViewController {
         configureView()
     }
     
-    func configureView() {
+    private func configureView() {
         view.addSubview(searchBar)
         view.addSubview(topLineView)
-        view.addSubview(emptyView)
-        view.addSubview(bottomLineView)
         
-        configureEmptyView()
+        if list.isEmpty {
+            configureEmptyView()
+        } else {
+            configureNotEmptyView()
+        }
+        
+        view.addSubview(bottomLineView)
         configureLayout()
     }
-    
-    func configureLayout() {
+
+    private func configureLayout() {
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
@@ -92,10 +119,6 @@ class SearchViewController: UIViewController {
             make.height.equalTo(1)
         }
         
-        emptyView.snp.makeConstraints { make in
-            make.center.equalTo(view.snp.center)
-        }
-        
         bottomLineView.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
@@ -103,9 +126,10 @@ class SearchViewController: UIViewController {
         }
     }
     
-    func configureEmptyView() {
+    private func configureEmptyView() {
         emptyView.addSubview(emptyImageView)
         emptyView.addSubview(emptyLabel)
+        view.addSubview(emptyView)
         
         emptyImageView.snp.makeConstraints { make in
             make.center.equalTo(emptyView.snp.center)
@@ -115,6 +139,42 @@ class SearchViewController: UIViewController {
             make.top.equalTo(emptyImageView.snp.bottom).offset(15)
             make.horizontalEdges.equalTo(emptyView.snp.horizontalEdges)
             make.height.equalTo(20)
+        }
+        
+        emptyView.snp.makeConstraints { make in
+            make.center.equalTo(view.snp.center)
+        }
+    }
+    
+    private func configureNotEmptyView() {
+        notEmptyView.addSubview(recentSearchLabel)
+        notEmptyView.addSubview(deleteAllButton)
+        notEmptyView.addSubview(tableView)
+        view.addSubview(notEmptyView)
+        
+        recentSearchLabel.snp.makeConstraints { make in
+            make.top.equalTo(notEmptyView.snp.top).offset(15)
+            make.leading.equalTo(notEmptyView.snp.leading).offset(15)
+            make.height.equalTo(20)
+        }
+        
+        deleteAllButton.snp.makeConstraints { make in
+            make.top.equalTo(notEmptyView.snp.top).offset(15)
+            make.trailing.equalTo(notEmptyView.snp.trailing).inset(15)
+            make.height.equalTo(20)
+            make.centerY.equalTo(recentSearchLabel.snp.centerY)
+        }
+        
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(recentSearchLabel.snp.bottom).offset(10)
+            make.horizontalEdges.equalTo(notEmptyView.snp.horizontalEdges)
+            make.bottom.equalTo(notEmptyView.snp.bottom)
+        }
+        
+        notEmptyView.snp.makeConstraints { make in
+            make.top.equalTo(topLineView.snp.bottom)
+            make.horizontalEdges.equalTo(view.snp.horizontalEdges)
+            make.bottom.equalTo(view.snp.bottom)
         }
     }
 }
