@@ -10,7 +10,7 @@ import Foundation
 struct Search: Decodable {
     let lastBuildDate: String
     let total, start, display: Int
-    let items: [Item]
+    var items: [Item]
 }
 
 struct Item: Decodable {

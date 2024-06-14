@@ -32,6 +32,7 @@
 		B1642DD22C1C8F37003032F9 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DD12C1C8F37003032F9 /* Search.swift */; };
 		B1642DD42C1C9354003032F9 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DD32C1C9354003032F9 /* SearchResultViewController.swift */; };
 		B1642DD72C1CA54D003032F9 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DD62C1CA54D003032F9 /* LineView.swift */; };
+		B1642DD92C1CD1E5003032F9 /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DD82C1CD1E5003032F9 /* SearchResultCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		B1642DD12C1C8F37003032F9 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		B1642DD32C1C9354003032F9 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		B1642DD62C1CA54D003032F9 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
+		B1642DD82C1CD1E5003032F9 /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				B1642DCE2C1C728F003032F9 /* SearchTableViewCell.swift */,
+				B1642DD82C1CD1E5003032F9 /* SearchResultCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				B1642DB82C1B0F76003032F9 /* ProfileSettingViewController.swift in Sources */,
 				B1642DD72C1CA54D003032F9 /* LineView.swift in Sources */,
 				B1642DC02C1BF123003032F9 /* SearchViewController.swift in Sources */,
+				B1642DD92C1CD1E5003032F9 /* SearchResultCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
