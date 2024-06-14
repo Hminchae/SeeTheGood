@@ -13,8 +13,8 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "\(user.nickName)'s SeeTheGood"
+        title = "\(user.nickName)'s See The Good"
         view.backgroundColor = .white
 
-    }
+    } 
 }

@@ -82,15 +82,11 @@
 		B1642D882C1AF24C003032F9 /* SeeTheGood */ = {
 			isa = PBXGroup;
 			children = (
-				B1642DC12C1BF1E6003032F9 /* Resource */,
 				B1642D8B2C1AF24C003032F9 /* SceneDelegate.swift */,
 				B1642D892C1AF24C003032F9 /* AppDelegate.swift */,
-				B1642DA22C1AF569003032F9 /* Model */,
-				B1642DA12C1AF554003032F9 /* Extension */,
-				B1642DA02C1AF52F003032F9 /* Protocol */,
-				B1642D9F2C1AF516003032F9 /* CustomView */,
-				B1642D9E2C1AF4F4003032F9 /* ViewController */,
-				B1642D9D2C1AF4B5003032F9 /* Enum */,
+				B1642DC12C1BF1E6003032F9 /* Resource */,
+				B1642D9E2C1AF4F4003032F9 /* Profile */,
+				B1642DC92C1C43AF003032F9 /* Main */,
 				B1642D922C1AF24E003032F9 /* Assets.xcassets */,
 				B1642D942C1AF24E003032F9 /* LaunchScreen.storyboard */,
 				B1642D972C1AF24E003032F9 /* Info.plist */,
@@ -107,16 +103,15 @@
 			path = Enum;
 			sourceTree = "<group>";
 		};
-		B1642D9E2C1AF4F4003032F9 /* ViewController */ = {
+		B1642D9E2C1AF4F4003032F9 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				B1642DC62C1C1E2B003032F9 /* Cell */,
 				B1642D8D2C1AF24C003032F9 /* OnboardingViewController.swift */,
 				B1642DB72C1B0F76003032F9 /* ProfileSettingViewController.swift */,
 				B1642DBB2C1BDF9D003032F9 /* ProfileImageSettingViewController.swift */,
-				B1642DBF2C1BF123003032F9 /* MainViewController.swift */,
 			);
-			path = ViewController;
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		B1642D9F2C1AF516003032F9 /* CustomView */ = {
@@ -154,6 +149,11 @@
 			isa = PBXGroup;
 			children = (
 				B1642DC22C1BF20B003032F9 /* UserDefaultManager.swift */,
+				B1642DA12C1AF554003032F9 /* Extension */,
+				B1642DA02C1AF52F003032F9 /* Protocol */,
+				B1642D9D2C1AF4B5003032F9 /* Enum */,
+				B1642DA22C1AF569003032F9 /* Model */,
+				B1642D9F2C1AF516003032F9 /* CustomView */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -164,6 +164,14 @@
 				B1642DC72C1C1E4A003032F9 /* ProfileImageCollectionViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		B1642DC92C1C43AF003032F9 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				B1642DBF2C1BF123003032F9 /* MainViewController.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

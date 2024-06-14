@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class ProfileImageCollectionViewCell: UICollectionViewCell {
+final class ProfileImageCollectionViewCell: UICollectionViewCell {
     
     var profileImage = {
         let imageView = UIImageView()
@@ -33,14 +33,9 @@ class ProfileImageCollectionViewCell: UICollectionViewCell {
     
     func configureView() {
         contentView.addSubview(profileImage)
-       configureLayout()
-    }
-    
-    func configureLayout() {
+        
         profileImage.snp.makeConstraints { make in
             make.edges.equalTo(contentView)
         }
     }
-
-    
 }
