@@ -13,14 +13,17 @@ class SearchTableViewCell: UITableViewCell {
 
     private let clockIconImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "clock")
+        let configuration = UIImage.SymbolConfiguration(pointSize: 20, weight: .heavy)
+        imageView.image = UIImage(systemName: "clock", withConfiguration: configuration)
+        imageView.tintColor = .black
         
         return imageView
     }()
     
-    private let searchRecordLabel = {
+    let searchRecordLabel = {
         let label = UILabel()
         label.textAlignment = .left
+        label.font = ViewConstant.Font.normal13
         
         return label
     }()
@@ -29,6 +32,7 @@ class SearchTableViewCell: UITableViewCell {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
         button.tintColor = .black
+        
         
         return button
     }()
@@ -53,22 +57,22 @@ class SearchTableViewCell: UITableViewCell {
     
     private func configureLayout() {
         clockIconImageView.snp.makeConstraints { make in
-            make.centerY.equalTo(contentView.snp.centerX)
-            make.leading.equalTo(contentView.snp.leading).offset(10)
-            make.size.equalTo(15)
+            make.centerY.equalTo(contentView.snp.centerY)
+            make.leading.equalTo(contentView.snp.leading).offset(15)
+            make.size.equalTo(17)
         }
         
         searchRecordLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(contentView.snp.centerX)
+            make.centerY.equalTo(contentView.snp.centerY)
             make.leading.equalTo(clockIconImageView.snp.trailing).offset(15)
             make.height.equalTo(15)
         }
         
         xButton.snp.makeConstraints { make in
-            make.centerY.equalTo(contentView.snp.centerX)
+            make.centerY.equalTo(contentView.snp.centerY)
             make.leading.equalTo(searchRecordLabel.snp.trailing).offset(10)
-            make.trailing.equalTo(contentView.snp.trailing).inset(10)
-            make.size.equalTo(15)
+            make.trailing.equalTo(contentView.snp.trailing).inset(15)
+            make.size.equalTo(13)
         }
     }
 }

@@ -12,7 +12,7 @@ import SnapKit
 class SearchViewController: UIViewController {
     
     private let user = UserDefaultManager.shared
-    private var list: [String] = ["냠냠"]
+    private var list: [String] = ["냠냠", "쩝쩝", "배고파롱"]
     
     private let searchTextField = {
         let textField = UITextField()
@@ -88,6 +88,11 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.title = "\(user.nickName)'s See The Good"
         view.backgroundColor = .white
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.identifier)
+        tableView.separatorStyle = .none
         
         configureView()
     }
@@ -177,4 +182,20 @@ class SearchViewController: UIViewController {
             make.bottom.equalTo(view.snp.bottom)
         }
     }
+}
+
+extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        list.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as! SearchTableViewCell
+        
+        cell.searchRecordLabel.text = list[indexPath.row]
+        
+        return cell
+    }
+    
+    
 }
