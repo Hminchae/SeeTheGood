@@ -24,11 +24,16 @@ enum ViewConstant {
     }
     
     enum BorderWidth {
-        static let selectedProfile = 3
-        static let unSelectedProfile = 1
+        static let selectedProfile: CGFloat = 3
+        static let unSelectedProfile: CGFloat = 1
     }
     
     enum Radius {
         static let orangeButton: CGFloat = 25
+    }
+    
+    enum OrangeBtnTextStyle: String {
+        case start = "시작하기"
+        case complete = "완료"
     }
 }

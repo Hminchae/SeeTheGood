@@ -29,17 +29,7 @@ final class OnboardingViewController: UIViewController {
         return imageView
     }()
     
-    // 커스텀 버튼 만들기
-    lazy private var startButton = {
-        let button = UIButton()
-        button.setTitle("시작하기", for: .normal)
-        button.titleLabel?.font = ViewConstant.Font.heavy16
-        button.layer.cornerRadius = ViewConstant.Radius.orangeButton
-        button.backgroundColor = .point
-        button.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
-        
-        return button
-    }()
+    private let startButton = OrangeButton(style: .start)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +44,12 @@ final class OnboardingViewController: UIViewController {
         view.addSubview(startButton)
         
         configureLayout()
+        
+        navigationItem.backButtonTitle = ""
+        
+        startButton.addTarget(self,
+                              action: #selector(startButtonClicked),
+                              for: .touchUpInside)
     }
     
     private func configureLayout() {
