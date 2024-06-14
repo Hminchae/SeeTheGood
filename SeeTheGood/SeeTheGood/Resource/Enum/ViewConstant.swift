@@ -14,6 +14,11 @@ enum ViewConstant {
         static let normal15 = UIFont.systemFont(ofSize: 15)
         static let normal16  = UIFont.systemFont(ofSize: 16)
         
+        static let semibold13 = UIFont.systemFont(ofSize: 13, weight: .semibold)
+        static let semibold14 = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        static let semibold15 = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        static let semibold16  = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        
         static let bold13 = UIFont.boldSystemFont(ofSize: 13)
         static let bold14 = UIFont.boldSystemFont(ofSize: 14)
         static let bold15 = UIFont.boldSystemFont(ofSize: 15)
