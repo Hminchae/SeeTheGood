@@ -11,7 +11,18 @@ import SnapKit
 
 final class ProfileSettingViewController: UIViewController {
     
-    private let selectedImageNum = Int.random(in: 0...11)
+    private let user = UserDefaultManager.shared
+    
+    var userSelectImageNum: Int?
+    
+    private var selectedImageNum: Int {
+        if let num = userSelectImageNum {
+            return num
+        } else {
+            return Int.random(in: 0...11)
+        }
+    }
+    
     private let lineView = {
         let view = UIView()
         view.backgroundColor = .thirdGray
@@ -45,7 +56,7 @@ final class ProfileSettingViewController: UIViewController {
         return button
     }()
     
-    private let nickNameTextField = {
+    lazy private var nickNameTextField = {
         let textField = UITextField()
         textField.placeholder = "닉네임을 입력해주세요 :)"
         textField.borderStyle = .none
@@ -53,11 +64,12 @@ final class ProfileSettingViewController: UIViewController {
         textField.textColor = .black
         textField.font = ViewConstant.Font.bold15
         textField.setPlaceholderColor(.lightGray)
+        textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         return textField
     }()
     
-    private let commentLabel = {
+    private var commentLabel = {
         let label = UILabel()
         label.text = "닉네임에 @는 포함할 수 없어요."
         label.font = ViewConstant.Font.normal13
@@ -76,6 +88,7 @@ final class ProfileSettingViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = .black
         print(selectedImageNum)
         configureView()
+        completeButton.addTarget(self, action: #selector(completeButtonClicked), for: .touchUpInside)
     }
     
     override func viewDidLayoutSubviews() {
@@ -145,5 +158,53 @@ final class ProfileSettingViewController: UIViewController {
         let vc = ProfileImageSettingViewController()
         vc.selectedImageNum = selectedImageNum
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func completeButtonClicked() {
+        
+        if let nickName = nickNameTextField.text, !nickName.isEmpty {
+            if isNickNameChecked(nickName) {
+                user.nickName = nickName
+                user.profileImageNum = selectedImageNum
+                let vc = MainViewController()
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        guard let nickName = nickNameTextField.text else { return }
+        
+        if nickName.count < 2 || nickName.count >= 10 {
+            commentLabel.text = "2글자 이상 10글자 미만으로 설정해주세요"
+            return
+        }
+        
+        let unwantedChars = CharacterSet(charactersIn: "@#$%")
+        let unwantedIntegers = CharacterSet.decimalDigits
+        
+        if nickName.rangeOfCharacter(from: unwantedChars) != nil {
+            commentLabel.text = "닉네임에 @,#,$,% 는 포함할 수 없어요"
+            return
+        }
+        
+        if nickName.rangeOfCharacter(from: unwantedIntegers) != nil {
+            commentLabel.text = "닉네임에 숫자는 포함할 수 없어요"
+            return
+        }
+        
+        commentLabel.text = "사용할 수 있는 닉네임이에요"
+    }
+    
+    private func isNickNameChecked(_ text: String) -> Bool {
+        let textCount = text.count
+        
+        if textCount >= 2 && textCount < 10 {
+            let unwantedChars = CharacterSet(charactersIn: "@#$%0123456789")
+            if text.rangeOfCharacter(from: unwantedChars) == nil {
+                return true
+            }
+        }
+        return false
     }
 }
