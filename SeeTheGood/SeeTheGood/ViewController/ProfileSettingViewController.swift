@@ -19,7 +19,8 @@ final class ProfileSettingViewController: UIViewController {
         if let num = userSelectImageNum {
             return num
         } else {
-            return Int.random(in: 0...11)
+            userSelectImageNum = Int.random(in: 0...11)
+            return userSelectImageNum!
         }
     }
     
@@ -33,7 +34,7 @@ final class ProfileSettingViewController: UIViewController {
     lazy private var profileImageView = {
         let imageView = UIImageView()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileImageClicked))
-        imageView.layer.borderWidth = ViewConstant.BorderWidth.selectedProfile
+        imageView.layer.borderWidth = 5
         imageView.layer.borderColor = UIColor.point.cgColor
         imageView.layer.cornerRadius = 50
         imageView.clipsToBounds = true
@@ -45,15 +46,21 @@ final class ProfileSettingViewController: UIViewController {
         return imageView
     }()
     
-    private var cameraButton = {
-        let button = UIButton()
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 13, weight: .medium)
-        button.backgroundColor = .point
-        button.setImage(UIImage(systemName: "camera.fill", withConfiguration: imageConfig), for: .normal)
-        button.imageView?.tintColor = .white
-        button.layer.cornerRadius = 15
+    private let profileCameraCircleView = {
+        let view = UIView()
+        view.layer.cornerRadius = 15
+        view.backgroundColor = .point
         
-        return button
+        return view
+    }()
+    
+    private let profileCameraCircleImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "camera.fill")
+        imageView.tintColor = .white
+        imageView.contentMode = .scaleAspectFit
+        
+        return imageView
     }()
     
     lazy private var nickNameTextField = {
@@ -88,6 +95,7 @@ final class ProfileSettingViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = .black
         print(selectedImageNum)
         configureView()
+        navigationItem.backButtonTitle = ""
         completeButton.addTarget(self, action: #selector(completeButtonClicked), for: .touchUpInside)
     }
     
@@ -99,11 +107,12 @@ final class ProfileSettingViewController: UIViewController {
     private func configureView() {
         view.addSubview(lineView)
         view.addSubview(profileImageView)
-        view.addSubview(cameraButton)
+        view.addSubview(profileCameraCircleView)
         view.addSubview(nickNameTextField)
         view.addSubview(commentLabel)
         view.addSubview(completeButton)
         
+        configureCameraCircleView()
         configureLayout()
     }
     
@@ -114,12 +123,12 @@ final class ProfileSettingViewController: UIViewController {
         }
         
         profileImageView.snp.makeConstraints { make in
-            make.top.equalTo(lineView.snp.bottom).offset(20)
+            make.top.equalTo(lineView.snp.bottom).offset(25)
             make.centerX.equalTo(view.snp.centerX)
             make.size.equalTo(100)
         }
         
-        cameraButton.snp.makeConstraints { make in
+        profileCameraCircleView.snp.makeConstraints { make in
             make.trailing.equalTo(profileImageView.snp.trailing)
             make.bottom.equalTo(profileImageView.snp.bottom)
             make.size.equalTo(30)
@@ -144,6 +153,14 @@ final class ProfileSettingViewController: UIViewController {
         }
     }
     
+    private func configureCameraCircleView() {
+        profileCameraCircleView.addSubview(profileCameraCircleImageView)
+        
+        profileCameraCircleImageView.snp.makeConstraints { make in
+            make.edges.equalTo(profileCameraCircleView.snp.edges).inset(5)
+        }
+    }
+    
     private func addBottomBorderToTextField(textField: UITextField) {
         let border = CALayer()
         border.frame = CGRect(x: 0,
@@ -157,6 +174,12 @@ final class ProfileSettingViewController: UIViewController {
     @objc private func profileImageClicked() {
         let vc = ProfileImageSettingViewController()
         vc.selectedImageNum = selectedImageNum
+        
+        vc.onImageSelect = { [weak self] selectedNum in
+            self?.userSelectImageNum = selectedNum
+            self?.profileImageView.image = UIImage(named: "profile_\(selectedNum)")
+        }
+        
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -164,10 +187,17 @@ final class ProfileSettingViewController: UIViewController {
         
         if let nickName = nickNameTextField.text, !nickName.isEmpty {
             if isNickNameChecked(nickName) {
+                
                 user.nickName = nickName
                 user.profileImageNum = selectedImageNum
-                let vc = MainViewController()
-                navigationController?.pushViewController(vc, animated: true)
+                user.didInitialSetting = true
+                
+                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+                let sceneDelegate = windowScene?.delegate as? SceneDelegate
+                
+                let vc = UINavigationController(rootViewController: MainViewController())
+                sceneDelegate?.window?.rootViewController = vc
+                sceneDelegate?.window?.makeKeyAndVisible()
             }
         }
     }

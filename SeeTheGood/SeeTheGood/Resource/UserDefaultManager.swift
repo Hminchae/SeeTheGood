@@ -11,7 +11,7 @@ import Foundation
  ✅ 유저가 가져야할 것
  - 닉네임
  - 프로필 사진 넘버
- -
+ - 초기 셋팅 여부
  */
 
 class UserDefaultManager {
@@ -36,6 +36,16 @@ class UserDefaultManager {
         
         set {
             UserDefaults.standard.set(newValue, forKey: "profileImageNum")
+        }
+    }
+    
+    var didInitialSetting: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: "didInitialSetting")
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: "didInitialSetting")
         }
     }
 }
