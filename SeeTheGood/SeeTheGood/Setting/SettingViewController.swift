@@ -86,7 +86,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: SettingListTableViewCell.identifier, for: indexPath) as! SettingListTableViewCell
 
             if indexPath.row == 0 {
-                cell.selectionStyle = UITableViewCell.SelectionStyle.none
+                cell.selectionStyle = .none
                 cell.configureFirstCell()
                 cell.productCountLabel.text = "158개"
                 cell.productLabel.text = "의 상품"
@@ -100,30 +100,28 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
-            defer {
+        print(indexPath)
+        defer {
+            if indexPath != [1, 0] { 
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
-            
+        }
+        switch indexPath.section {
+        case 0:
             let vc = ProfileSettingViewController()
             navigationController?.pushViewController(vc, animated: true)
         case 1:
-            defer {
-                tableView.reloadRows(at: [indexPath], with: .automatic)
-            }
-            
             switch indexPath.row {
             case 0:
-                print("후엥")
+                print(indexPath.row )
             case 1:
-                print("우웩")
+                print(indexPath.row )
             case 2:
-                print("우웩")
+                print(indexPath.row )
             case 3:
-                print("우웩")
+                print(indexPath.row )
             case 4:
-                print("우웩")
+                print(indexPath.row )
             default:
                 fatalError("error")
             }
