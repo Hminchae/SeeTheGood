@@ -14,6 +14,7 @@ class MainTabBarViewController: UITabBarController {
         
         tabBar.tintColor = .point
         tabBar.barTintColor = .secondGray
+        tabBar.isTranslucent = false
         
         let vc1 = SearchViewController()
         let search = UINavigationController(rootViewController: vc1)
@@ -23,6 +24,18 @@ class MainTabBarViewController: UITabBarController {
         let setting = UINavigationController(rootViewController: vc2)
         setting.tabBarItem = UITabBarItem(title: "설정", image: UIImage(systemName: "person"), tag: 1)
         
+        let appearance = UITabBarAppearance()
+        
+        appearance.shadowColor = UIColor.clear
+        appearance.backgroundColor = .white
+        
+        tabBar.standardAppearance = appearance
+        
+        if #available(iOS 15.0, *) {
+                // set tabbar opacity
+                tabBar.scrollEdgeAppearance = tabBar.standardAppearance
+        }
+
         setViewControllers([search, setting], animated: true)
     }
 }

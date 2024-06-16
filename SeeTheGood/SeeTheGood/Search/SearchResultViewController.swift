@@ -63,6 +63,8 @@ class SearchResultViewController: UIViewController {
     
     lazy private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     
+    private let bottomLineView = LineView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -87,6 +89,7 @@ class SearchResultViewController: UIViewController {
         view.addSubview(totalSearchResultLabel)
         view.addSubview(sortStackView)
         view.addSubview(collectionView)
+        view.addSubview(bottomLineView)
         
         configureLayout()
     }
@@ -114,6 +117,12 @@ class SearchResultViewController: UIViewController {
             make.top.equalTo(sortStackView.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
             make.bottom.equalTo(view.snp.bottom)
+        }
+        
+        bottomLineView.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(1)
         }
     }
     
@@ -270,7 +279,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         if let number = Int(price) {
             return "\(formatter.string(from: NSNumber(value: number)) ?? price)원"
         } else {
-            return price 
+            return price
         }
     }
 }
