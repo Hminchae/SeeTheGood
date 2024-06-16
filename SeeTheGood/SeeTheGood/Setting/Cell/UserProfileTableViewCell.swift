@@ -13,23 +13,21 @@ final class UserProfileTableViewCell: UITableViewCell {
     
     private let user = UserDefaultManager.shared
     
-    lazy private var profileImageView = {
+    var profileImageView = {
         let imageView = UIImageView()
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.point.cgColor
         imageView.layer.cornerRadius = 40
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "profile_\(user.profileImageNum)")
         
         return imageView
     }()
     
     private var userInfoView = UIView()
     
-    lazy private var userNicknameLabel = {
+    var userNicknameLabel = {
         let label = UILabel()
-        label.text = user.nickName
         label.font = ViewConstant.Font.heavy16
         label.textColor = .black
         

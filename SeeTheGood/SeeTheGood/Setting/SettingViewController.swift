@@ -29,8 +29,12 @@ final class SettingViewController: UIViewController {
         tableView.backgroundColor = .clear
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorColor = .secondGray
-    
+        
         configureView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadRows(at: [[0, 0]], with: .none)
     }
     
     private func configureView() {
@@ -78,15 +82,17 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print(indexPath)
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: UserProfileTableViewCell.identifier, for: indexPath) as! UserProfileTableViewCell
             cell.accessoryType = .disclosureIndicator
-            
+            cell.profileImageView.image = UIImage(named: "profile_\(user.profileImageNum)")
+            cell.userNicknameLabel.text = user.nickName
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: SettingListTableViewCell.identifier, for: indexPath) as! SettingListTableViewCell
-
+            
             if indexPath.row == 0 {
                 cell.configureFirstCell()
                 cell.productCountLabel.text = "158개"
@@ -162,5 +168,3 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         sceneDelegate?.window?.makeKeyAndVisible()
     }
 }
-
-

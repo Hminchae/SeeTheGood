@@ -12,7 +12,6 @@ import SnapKit
 final class ProfileSettingViewController: UIViewController {
     
     private let user = UserDefaultManager.shared
-    
     var userSelectImageNum: Int?
     
     private var selectedImageNum: Int {
@@ -101,7 +100,6 @@ final class ProfileSettingViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
-
         navigationItem.backButtonTitle = ""
         self.navigationController?.navigationBar.tintColor = .black
     }
@@ -112,8 +110,7 @@ final class ProfileSettingViewController: UIViewController {
         view.addSubview(profileCameraCircleView)
         view.addSubview(nickNameTextField)
         view.addSubview(commentLabel)
-
-
+        
         configureCameraCircleView()
         configureLayout()
     }
@@ -197,8 +194,6 @@ final class ProfileSettingViewController: UIViewController {
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(15)
         }
-        
-       
     }
     
     private func configureCameraCircleView() {
