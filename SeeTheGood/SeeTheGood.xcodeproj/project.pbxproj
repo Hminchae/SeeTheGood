@@ -36,6 +36,7 @@
 		B1642DDB2C1EAB80003032F9 /* SearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DDA2C1EAB80003032F9 /* SearchDetailViewController.swift */; };
 		B1642DDE2C1EECE6003032F9 /* UserProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DDD2C1EECE6003032F9 /* UserProfileTableViewCell.swift */; };
 		B1642DE02C1EED6A003032F9 /* SettingListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DDF2C1EED6A003032F9 /* SettingListTableViewCell.swift */; };
+		B1642DE42C1F4910003032F9 /* Basket.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DE32C1F4910003032F9 /* Basket.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		B1642DDA2C1EAB80003032F9 /* SearchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailViewController.swift; sourceTree = "<group>"; };
 		B1642DDD2C1EECE6003032F9 /* UserProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTableViewCell.swift; sourceTree = "<group>"; };
 		B1642DDF2C1EED6A003032F9 /* SettingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListTableViewCell.swift; sourceTree = "<group>"; };
+		B1642DE32C1F4910003032F9 /* Basket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basket.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				B1642DD12C1C8F37003032F9 /* Search.swift */,
+				B1642DE32C1F4910003032F9 /* Basket.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				B1642DCD2C1C584A003032F9 /* SettingViewController.swift in Sources */,
 				B1642DDB2C1EAB80003032F9 /* SearchDetailViewController.swift in Sources */,
 				B1642DDE2C1EECE6003032F9 /* UserProfileTableViewCell.swift in Sources */,
+				B1642DE42C1F4910003032F9 /* Basket.swift in Sources */,
 				B1642DBC2C1BDF9D003032F9 /* ProfileImageSettingViewController.swift in Sources */,
 				B1642DC52C1C1D5C003032F9 /* ReuseIdentifierProtocol.swift in Sources */,
 				B1642DA42C1AF5EB003032F9 /* Enums.swift in Sources */,

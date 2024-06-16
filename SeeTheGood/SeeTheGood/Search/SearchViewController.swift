@@ -13,14 +13,7 @@ import Alamofire
 final class SearchViewController: UIViewController {
     
     private let user = UserDefaultManager.shared
-    private var list: [String] = ["사과", "바나나", "용과"]
-    
-    private let searchTextField = {
-        let textField = UITextField()
-        textField.placeholder = "브랜드, 상품 등을 입력하세요."
-        
-        return textField
-    }()
+    lazy private var list: [String] = user.mySearchList
     
     private let searchBar = {
         let searchBar = UISearchBar()
@@ -62,15 +55,16 @@ final class SearchViewController: UIViewController {
         return label
     }()
     
-    private let deleteAllButton = {
+    lazy private var deleteAllButton = {
         let button = UIButton()
         button.setTitle("전체 삭제", for: .normal)
         button.setTitleColor(.point, for: .normal)
         button.titleLabel?.font = ViewConstant.Font.normal13
+        button.addTarget(self, action: #selector(deleteAllButtonClicked), for: .touchUpInside)
         
         return button
     }()
-    
+
     private let tableView = UITableView()
     
     private let bottomLineView = LineView()
@@ -100,11 +94,14 @@ final class SearchViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         responseList = Search(lastBuildDate: "",
                               total: 0,
                               start: 0,
                               display: 0,
                               items: [])
+        list = user.mySearchList
+        tableView.reloadData()
     }
     
     private func configureView() {
@@ -192,6 +189,12 @@ final class SearchViewController: UIViewController {
             make.bottom.equalTo(view.snp.bottom)
         }
     }
+    
+    @objc private func deleteAllButtonClicked() {
+        UserDefaults.standard.removeObject(forKey: "mySearchList")
+        list = user.mySearchList
+        tableView.reloadData()
+    }
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -199,32 +202,43 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let target = searchBar.text else { return }
         
-            list.append(target)
-            tableView.reloadData()
+        user.mySearchList.append(target)
+        tableView.reloadData()
         
-            let vc = SearchResultViewController()
-            vc.searchWord = target
+        let vc = SearchResultViewController()
+        vc.searchWord = target
         
-            navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        list.count
+        print(list.count)
+        return list.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as! SearchTableViewCell
         
         cell.searchRecordLabel.text = list.reversed()[indexPath.row]
+        cell.xButton.addTarget(self, action: #selector(xButtonClicked), for: .touchUpInside)
+        cell.xButton.tag = indexPath.row
         
         return cell
     }
     
+    @objc func xButtonClicked(_ sender: UIButton) {
+        let index = sender.tag
+        var mySearchList = user.mySearchList
+        mySearchList.remove(at: mySearchList.count - index - 1)
+        user.mySearchList = mySearchList
+        list = user.mySearchList
+        tableView.reloadData()
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         defer {
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }

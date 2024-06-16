@@ -28,7 +28,7 @@ class SearchTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let xButton = {
+    let xButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
         button.tintColor = .black
