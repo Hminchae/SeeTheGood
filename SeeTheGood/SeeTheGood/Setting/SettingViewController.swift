@@ -8,7 +8,7 @@
 import UIKit
 
 final class SettingViewController: UIViewController {
-
+    
     private let topLineView = LineView()
     
     private let tableView = UITableView()
@@ -23,9 +23,11 @@ final class SettingViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UserProfileTableViewCell.self, forCellReuseIdentifier: UserProfileTableViewCell.identifier)
-        tableView.separatorStyle = .none
+        tableView.register(SettingListTableViewCell.self, forCellReuseIdentifier: SettingListTableViewCell.identifier)
         tableView.backgroundColor = .clear
-        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.separatorColor = .secondGray
+    
         configureView()
     }
     
@@ -58,24 +60,77 @@ final class SettingViewController: UIViewController {
 
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return SettingList.allCases.count
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(#function)
-        let cell = tableView.dequeueReusableCell(withIdentifier: UserProfileTableViewCell.identifier, for: indexPath) as! UserProfileTableViewCell
-        cell.backgroundColor = .clear
-        return cell
+        switch indexPath.section {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: UserProfileTableViewCell.identifier, for: indexPath) as! UserProfileTableViewCell
+            cell.accessoryType = .disclosureIndicator
+            
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: SettingListTableViewCell.identifier, for: indexPath) as! SettingListTableViewCell
+
+            if indexPath.row == 0 {
+                cell.selectionStyle = UITableViewCell.SelectionStyle.none
+                cell.configureFirstCell()
+                cell.productCountLabel.text = "158개"
+                cell.productLabel.text = "의 상품"
+            }
+            cell.listTitleLabel.text = SettingList.allCases[indexPath.row].rawValue
+            
+            return cell
+        default:
+            fatalError("error")
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        defer {
-            tableView.reloadRows(at: [indexPath], with: .automatic)
+        switch indexPath.section {
+        case 0:
+            defer {
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+            
+            let vc = ProfileSettingViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        case 1:
+            defer {
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+            
+            switch indexPath.row {
+            case 0:
+                print("후엥")
+            case 1:
+                print("우웩")
+            case 2:
+                print("우웩")
+            case 3:
+                print("우웩")
+            case 4:
+                print("우웩")
+            default:
+                fatalError("error")
+            }
+        default:
+            fatalError("error")
         }
-        
-        let vc = ProfileSettingViewController()
-        navigationController?.pushViewController(vc, animated: true)
     }
 }
+
+

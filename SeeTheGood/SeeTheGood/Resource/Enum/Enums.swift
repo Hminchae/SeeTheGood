@@ -50,3 +50,17 @@ enum SortType: Int {
     case dsc
     case asc
 }
+
+// 설정 리스트
+enum SettingSections {
+    case profileSetting
+    case settingList
+}
+
+enum SettingList: String, CaseIterable {
+    case basketList = "나의 장바구니 목록"
+    case fnq = "자주 묻는 질문"
+    case question = "1:1 문의"
+    case notiSetting = "알림 설정"
+    case withdraw = "탈퇴하기"
+}

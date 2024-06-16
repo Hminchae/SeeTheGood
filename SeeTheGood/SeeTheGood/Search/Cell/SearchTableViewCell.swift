@@ -23,7 +23,7 @@ class SearchTableViewCell: UITableViewCell {
     let searchRecordLabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = ViewConstant.Font.normal13
+        label.font = ViewConstant.Font.normal14
         
         return label
     }()

@@ -63,11 +63,10 @@ final class UserProfileTableViewCell: UITableViewCell {
     }
     
     private func configureLayout() {
-        print(#function)
         profileImageView.snp.makeConstraints { make in
             make.verticalEdges.equalTo(contentView.snp.verticalEdges).inset(20)
             make.leading.equalTo(contentView.snp.leading).offset(15)
-            make.size.equalTo(80)
+            make.size.equalTo(80).priority(.high)
         }
         
         userInfoView.snp.makeConstraints { make in
