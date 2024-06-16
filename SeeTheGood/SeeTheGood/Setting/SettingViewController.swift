@@ -88,11 +88,15 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: SettingListTableViewCell.identifier, for: indexPath) as! SettingListTableViewCell
 
             if indexPath.row == 0 {
-                cell.selectionStyle = .none
                 cell.configureFirstCell()
                 cell.productCountLabel.text = "158개"
                 cell.productLabel.text = "의 상품"
             }
+            
+            if indexPath.row < 4 {
+                cell.selectionStyle = .none
+            }
+            
             cell.listTitleLabel.text = SettingList.allCases[indexPath.row].rawValue
             
             return cell
@@ -102,7 +106,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
         defer {
             if indexPath != [1, 0] {
                 tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -114,14 +117,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             navigationController?.pushViewController(vc, animated: true)
         case 1:
             switch indexPath.row {
-            case 0:
-                print(indexPath.row )
-            case 1:
-                print(indexPath.row )
-            case 2:
-                print(indexPath.row )
-            case 3:
-                print(indexPath.row )
+            case 0...3:
+                print("추가구현 예정")
             case 4:
                 alertWithdraw()
             default:

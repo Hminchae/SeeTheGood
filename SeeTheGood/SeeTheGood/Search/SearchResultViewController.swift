@@ -11,11 +11,9 @@ import Alamofire
 import Kingfisher
 import SnapKit
 
-
 final class SearchResultViewController: UIViewController {
     
     var searchWord: String?
-    var sortWay: String = "sim"
     var page = 1
     var basketDictionary: [String: Bool] = [:]
     var currentSortType: SortType = .sim
