@@ -18,6 +18,8 @@ final class SearchResultViewController: UIViewController {
     var basketDictionary: [String: Bool] = [:]
     var currentSortType: SortType = .sim
     
+    private var user = UserDefaultManager.shared
+    
     lazy var currentSearchQueryTotalPage: Int = {
         if responseList.display != 0 {
             return responseList.total / responseList.display
@@ -73,12 +75,34 @@ final class SearchResultViewController: UIViewController {
         view.backgroundColor = .white
         navigationItem.backButtonTitle = ""
         self.navigationController?.navigationBar.tintColor = .black
-
+        
         configureAsyncTask()
         configureStackView()
         configureSortButtons()
         configureCollectionView()
         configureView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print(#function)
+        for item in user.basketItems {
+            basketDictionary[item] = true
+        }
+
+        collectionView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print(#function)
+        var list = user.basketItems
+        let trueList = basketDictionary.filter { $0.value }.map { $0.key }
+        let falseList = basketDictionary.filter { !$0.value }.map { $0.key }
+        
+        list = list.filter { !falseList.contains($0) }
+        list.append(contentsOf: trueList)
+        user.basketItems = Array(Set(list))
     }
     
     private func configureCollectionView() {
@@ -323,8 +347,9 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     
     @objc func basketButtonClicked(_ sender: UIButton) {
         let index = sender.tag
+        let targetId = responseList.items[index].productId
         
-        basketDictionary[responseList.items[index].productId] = !(basketDictionary[responseList.items[index].productId] ?? false)
+        basketDictionary[targetId] = !(basketDictionary[targetId] ?? false)
         collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
     }
 }

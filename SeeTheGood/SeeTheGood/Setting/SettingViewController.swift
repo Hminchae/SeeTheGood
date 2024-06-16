@@ -35,6 +35,7 @@ final class SettingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadRows(at: [[0, 0]], with: .none)
+        tableView.reloadRows(at: [[1, 0]], with: .none)
     }
     
     private func configureView() {
@@ -94,7 +95,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             
             if indexPath.row == 0 {
                 cell.configureFirstCell()
-                cell.productCountLabel.text = "158개"
+                cell.productCountLabel.text = "\(user.basketItems.count)개"
                 cell.productLabel.text = "의 상품"
             }
             
