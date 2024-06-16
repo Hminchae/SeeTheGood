@@ -8,8 +8,8 @@
 import UIKit
 
 import Alamofire
-import SnapKit
 import Kingfisher
+import SnapKit
 
 
 final class SearchResultViewController: UIViewController {
@@ -73,8 +73,9 @@ final class SearchResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationItem.backButtonTitle = ""
         self.navigationController?.navigationBar.tintColor = .black
-        
+
         configureAsyncTask()
         configureStackView()
         configureSortButtons()
@@ -90,6 +91,7 @@ final class SearchResultViewController: UIViewController {
         
         collectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
     }
+    
     private func configureView() {
         view.addSubview(topLineView)
         view.addSubview(totalSearchResultLabel)
@@ -259,10 +261,7 @@ extension SearchResultViewController {
 
 extension SearchResultViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(#function)
-        print(responseList)
-        print(responseList.items.count)
-        return responseList.items.count
+        responseList.items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -292,7 +291,12 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = SearchDetailViewController()
+        let data = responseList.items[indexPath.row]
+        vc.link = data.link
+        vc.productTitle = cleanText(data.title)
         
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func cleanText(_ text: String) -> String {

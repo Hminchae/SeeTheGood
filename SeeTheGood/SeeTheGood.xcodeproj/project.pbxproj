@@ -33,6 +33,7 @@
 		B1642DD42C1C9354003032F9 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DD32C1C9354003032F9 /* SearchResultViewController.swift */; };
 		B1642DD72C1CA54D003032F9 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DD62C1CA54D003032F9 /* LineView.swift */; };
 		B1642DD92C1CD1E5003032F9 /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DD82C1CD1E5003032F9 /* SearchResultCollectionViewCell.swift */; };
+		B1642DDB2C1EAB80003032F9 /* SearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DDA2C1EAB80003032F9 /* SearchDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		B1642DD32C1C9354003032F9 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		B1642DD62C1CA54D003032F9 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 		B1642DD82C1CD1E5003032F9 /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
+		B1642DDA2C1EAB80003032F9 /* SearchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 				B1642DD02C1C7296003032F9 /* Cell */,
 				B1642DBF2C1BF123003032F9 /* SearchViewController.swift */,
 				B1642DD32C1C9354003032F9 /* SearchResultViewController.swift */,
+				B1642DDA2C1EAB80003032F9 /* SearchDetailViewController.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				B1642DD22C1C8F37003032F9 /* Search.swift in Sources */,
 				B1642DBA2C1B1167003032F9 /* OrangeButton.swift in Sources */,
 				B1642DCD2C1C584A003032F9 /* SettingViewController.swift in Sources */,
+				B1642DDB2C1EAB80003032F9 /* SearchDetailViewController.swift in Sources */,
 				B1642DBC2C1BDF9D003032F9 /* ProfileImageSettingViewController.swift in Sources */,
 				B1642DC52C1C1D5C003032F9 /* ReuseIdentifierProtocol.swift in Sources */,
 				B1642DA42C1AF5EB003032F9 /* Enums.swift in Sources */,
