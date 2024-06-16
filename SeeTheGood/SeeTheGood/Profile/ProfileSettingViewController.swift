@@ -179,13 +179,14 @@ final class ProfileSettingViewController: UIViewController {
     }
     
     @objc private func completeButtonClicked() {
-        
+        let today = formatTodayDate()
         if let nickName = nickNameTextField.text, !nickName.isEmpty {
             if isNickNameChecked(nickName) {
                 
                 user.nickName = nickName
                 user.profileImageNum = selectedImageNum
                 user.didInitialSetting = true
+                user.signUpDate = today
                 
                 let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
                 let sceneDelegate = windowScene?.delegate as? SceneDelegate
@@ -230,5 +231,14 @@ final class ProfileSettingViewController: UIViewController {
             }
         }
         return false
+    }
+    
+    private func formatTodayDate() -> String {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy. MM. dd"
+        let dateString = dateFormatter.string(from: date)
+        
+        return dateString
     }
 }

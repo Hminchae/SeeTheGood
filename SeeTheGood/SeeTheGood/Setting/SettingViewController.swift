@@ -18,17 +18,23 @@ final class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationItem.backButtonTitle = ""
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UserProfileTableViewCell.self, forCellReuseIdentifier: UserProfileTableViewCell.identifier)
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .clear
         
         configureView()
     }
     
     private func configureView() {
         navigationItem.title = "SETTING"
+        view.addSubview(tableView)
         view.addSubview(topLineView)
-        
-        
         view.addSubview(bottomLineView)
+        
         configureLayout()
     }
     
@@ -38,10 +44,38 @@ final class SettingViewController: UIViewController {
             make.height.equalTo(1)
         }
         
+        tableView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
         bottomLineView.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(1)
         }
+    }
+}
+
+extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print(#function)
+        let cell = tableView.dequeueReusableCell(withIdentifier: UserProfileTableViewCell.identifier, for: indexPath) as! UserProfileTableViewCell
+        cell.backgroundColor = .clear
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        defer {
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+        
+        let vc = ModifyProfileViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

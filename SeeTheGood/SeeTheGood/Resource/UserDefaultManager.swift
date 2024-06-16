@@ -12,6 +12,7 @@ import Foundation
  - 닉네임
  - 프로필 사진 넘버
  - 초기 셋팅 여부
+ - 가입 날짜
  */
 
 class UserDefaultManager {
@@ -46,6 +47,16 @@ class UserDefaultManager {
         
         set {
             UserDefaults.standard.set(newValue, forKey: "didInitialSetting")
+        }
+    }
+    
+    var signUpDate: String {
+        get {
+            return UserDefaults.standard.string(forKey: "signUpDate") ?? "가입정보없음"
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: "signUpDate")
         }
     }
 }
