@@ -9,6 +9,8 @@ import UIKit
 
 final class SettingViewController: UIViewController {
     
+    private let user = UserDefaultManager.shared
+    
     private let topLineView = LineView()
     
     private let tableView = UITableView()
@@ -102,7 +104,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath)
         defer {
-            if indexPath != [1, 0] { 
+            if indexPath != [1, 0] {
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
         }
@@ -121,13 +123,46 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             case 3:
                 print(indexPath.row )
             case 4:
-                print(indexPath.row )
+                alertWithdraw()
             default:
                 fatalError("error")
             }
         default:
             fatalError("error")
         }
+    }
+    
+    func alertWithdraw() {
+        let alert = UIAlertController(
+            title: "탈퇴하기",
+            message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴 하시겠습니까?",
+            preferredStyle: .alert)
+        
+        let confirm = UIAlertAction(
+            title: "확인",
+            style: .default) { action in
+                self.user.nickName = "사용자"
+                self.user.profileImageNum = 0
+                self.user.didInitialSetting = false
+                self.user.signUpDate = "가입정보없음"
+                self.popTheOnboardingView()
+            }
+        let cancel = UIAlertAction(
+            title: "취소",
+            style: .cancel)
+        
+        alert.addAction(cancel)
+        alert.addAction(confirm)
+        
+        present(alert, animated: true)
+    }
+    
+    func popTheOnboardingView() {
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+        
+        sceneDelegate?.window?.rootViewController = UINavigationController(rootViewController: OnboardingViewController())
+        sceneDelegate?.window?.makeKeyAndVisible()
     }
 }
 

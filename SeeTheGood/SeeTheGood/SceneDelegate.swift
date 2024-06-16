@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let vc =  MainTabBarViewController()
             window?.rootViewController = vc
         } else {
-            let vc = UINavigationController(rootViewController: ProfileSettingViewController())
+            let vc = UINavigationController(rootViewController: OnboardingViewController())
             window?.rootViewController = vc
         }
         
