@@ -194,42 +194,18 @@ class SearchViewController: UIViewController {
     }
 }
 
-// 네트워크
-extension SearchViewController {
-    
-    func callRequest(query: String) async -> Search? {
-        let url = "\(APIKey.url.rawValue)?query=\(query)"
-        let header: HTTPHeaders = [
-            "X-Naver-Client-Id": APIKey.clientID.rawValue,
-            "X-Naver-Client-Secret": APIKey.clientSecret.rawValue
-        ]
-        
-        do {
-            let response = try await AF.request(url,
-                                                method: .get,
-                                                headers: header)
-                .serializingDecodable(Search.self).value
-            return response
-        } catch {
-            print("네트워크 오류")
-            return nil
-        }
-    }
-}
-
 extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let text = searchBar.text else { return }
+        guard let target = searchBar.text else { return }
         
-        Task {
-            if let value = await callRequest(query: text) {
-                responseList = value
-            }
-            list.append(text)
+            list.append(target)
             tableView.reloadData()
-            print(responseList)
-        }
+        
+            let vc = SearchResultViewController()
+            vc.searchWord = target
+        
+            navigationController?.pushViewController(vc, animated: true)
     }
 }
 

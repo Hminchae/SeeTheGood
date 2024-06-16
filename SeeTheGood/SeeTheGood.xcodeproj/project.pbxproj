@@ -12,7 +12,7 @@
 		B1642D8E2C1AF24C003032F9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642D8D2C1AF24C003032F9 /* OnboardingViewController.swift */; };
 		B1642D932C1AF24E003032F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1642D922C1AF24E003032F9 /* Assets.xcassets */; };
 		B1642D962C1AF24E003032F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1642D942C1AF24E003032F9 /* LaunchScreen.storyboard */; };
-		B1642DA42C1AF5EB003032F9 /* ViewConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DA32C1AF5EB003032F9 /* ViewConstant.swift */; };
+		B1642DA42C1AF5EB003032F9 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DA32C1AF5EB003032F9 /* Enums.swift */; };
 		B1642DA82C1AF9B4003032F9 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DA72C1AF9B4003032F9 /* APIKey.swift */; };
 		B1642DAD2C1B081E003032F9 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = B1642DAC2C1B081E003032F9 /* Toast */; };
 		B1642DB02C1B082C003032F9 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B1642DAF2C1B082C003032F9 /* Alamofire */; };
@@ -43,7 +43,7 @@
 		B1642D922C1AF24E003032F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B1642D952C1AF24E003032F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B1642D972C1AF24E003032F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B1642DA32C1AF5EB003032F9 /* ViewConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConstant.swift; sourceTree = "<group>"; };
+		B1642DA32C1AF5EB003032F9 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		B1642DA72C1AF9B4003032F9 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		B1642DB72C1B0F76003032F9 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 		B1642DB92C1B1167003032F9 /* OrangeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrangeButton.swift; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				B1642DA72C1AF9B4003032F9 /* APIKey.swift */,
-				B1642DA32C1AF5EB003032F9 /* ViewConstant.swift */,
+				B1642DA32C1AF5EB003032F9 /* Enums.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -302,7 +302,7 @@
 				B1642DCD2C1C584A003032F9 /* SettingViewController.swift in Sources */,
 				B1642DBC2C1BDF9D003032F9 /* ProfileImageSettingViewController.swift in Sources */,
 				B1642DC52C1C1D5C003032F9 /* ReuseIdentifierProtocol.swift in Sources */,
-				B1642DA42C1AF5EB003032F9 /* ViewConstant.swift in Sources */,
+				B1642DA42C1AF5EB003032F9 /* Enums.swift in Sources */,
 				B1642DD42C1C9354003032F9 /* SearchResultViewController.swift in Sources */,
 				B1642D8C2C1AF24C003032F9 /* SceneDelegate.swift in Sources */,
 				B1642DC32C1BF20B003032F9 /* UserDefaultManager.swift in Sources */,

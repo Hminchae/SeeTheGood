@@ -11,14 +11,8 @@ import Alamofire
 import SnapKit
 import Kingfisher
 
-enum SortType: Int {
-    case sim = 0
-    case date
-    case dsc
-    case asc
-}
 
-class SearchResultViewController: UIViewController {
+final class SearchResultViewController: UIViewController {
     
     var searchWord: String?
     var sortWay: String = "sim"
@@ -83,16 +77,16 @@ class SearchResultViewController: UIViewController {
         
         configureAsyncTask()
         configureStackView()
-        configureCollectionView()
         configureSortButtons()
+        configureCollectionView()
         configureView()
     }
     
     private func configureCollectionView() {
+        collectionView.backgroundColor = .clear
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.prefetchDataSource = self
-        collectionView.backgroundColor = .clear
         
         collectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
     }
@@ -142,7 +136,7 @@ class SearchResultViewController: UIViewController {
         if let target = searchWord {
             navigationItem.title = target
             Task {
-                await callRequest(query: target, sort: "sim", page: page)
+                await callRequest(query: target, sort: "\(SortType.sim)", page: page)
             }
         }
     }
@@ -293,9 +287,8 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         cell.basketButton.setImage(isBasketClicked ? UIImage(named: "like_selected") : UIImage(named: "like_unselected") , for: .normal)
         cell.basketButton.tag = indexPath.row
         cell.basketButton.addTarget(self, action: #selector(basketButtonClicked), for: .touchUpInside)
+        
         return cell
-        
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -338,9 +331,8 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
                 page += 1
                 Task {
                     if let searchWord = searchWord {
-                        await callRequest(query: searchWord, sort: sortWay, page: page)
+                        await callRequest(query: searchWord, sort: "\(SortType.sim)", page: page)
                     }
-                    print(page)
                 }
             }
         }

@@ -1,5 +1,5 @@
 //
-//  ViewStyle.swift
+//  Enums.swift
 //  SeeTheGood
 //
 //  Created by 황민채 on 6/13/24.
@@ -41,4 +41,12 @@ enum ViewConstant {
         case start = "시작하기"
         case complete = "완료"
     }
+}
+
+// 검색 결과 정렬
+enum SortType: Int {
+    case sim = 0
+    case date
+    case dsc
+    case asc
 }
