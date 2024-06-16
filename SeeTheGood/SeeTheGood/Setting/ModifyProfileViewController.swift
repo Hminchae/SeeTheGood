@@ -1,13 +1,13 @@
 //
-//  SettingViewController.swift
+//  ModifyProfileViewController.swift
 //  SeeTheGood
 //
-//  Created by 황민채 on 6/14/24.
+//  Created by 황민채 on 6/16/24.
 //
 
 import UIKit
 
-final class SettingViewController: UIViewController {
+final class ModifyProfileViewController: UIViewController {
 
     private let topLineView = LineView()
     

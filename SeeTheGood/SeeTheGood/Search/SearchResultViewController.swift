@@ -294,6 +294,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = SearchDetailViewController()
         let data = responseList.items[indexPath.row]
+        
         vc.link = data.link
         vc.productTitle = cleanText(data.title)
         vc.isBasketClicked = basketDictionary[data.productId]

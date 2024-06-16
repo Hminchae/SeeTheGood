@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Alamofire
 
-class SearchViewController: UIViewController {
+final class SearchViewController: UIViewController {
     
     private let user = UserDefaultManager.shared
     private var list: [String] = ["사과", "바나나", "용과"]
