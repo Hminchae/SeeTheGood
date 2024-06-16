@@ -20,7 +20,6 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
     
     let basketButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "basket.fill"), for: .normal)
         button.layer.cornerRadius = 8
         
         return button
@@ -29,7 +28,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
     let mallNameLabel = {
         let label = UILabel()
         label.font = ViewConstant.Font.normal13
-        label.textColor = .thirdGray
+        label.textColor = .secondGray
         label.textAlignment = .left
         
         return label
@@ -41,6 +40,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
         label.textColor = .black
         label.textAlignment = .left
         label.numberOfLines = 2
+        
         return label
     }()
     

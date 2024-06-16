@@ -11,12 +11,20 @@ import Alamofire
 import SnapKit
 import Kingfisher
 
+enum SortType: Int {
+    case sim = 0
+    case date
+    case dsc
+    case asc
+}
+
 class SearchResultViewController: UIViewController {
     
     var searchWord: String?
     var sortWay: String = "sim"
     var page = 1
     var basketDictionary: [Int: Bool] = [:]
+    var currentSortType: SortType = .sim
     
     lazy var currentSearchQueryTotalPage: Int = {
         if responseList.display != 0 {
@@ -57,10 +65,12 @@ class SearchResultViewController: UIViewController {
         return stackView
     }()
     
-    lazy private var sortSimButton = selectedButtonSet("정확도")
-    lazy private var sortDateButton = unSelectedButtonSet("날짜순")
-    lazy private var sortDscButton = unSelectedButtonSet("가격높은순")
-    lazy private var sortAscButton = unSelectedButtonSet("가격낮은순")
+    lazy private var sortButtons: [UIButton] = [
+        buttonSet("정확도", tag: SortType.sim.rawValue),
+        buttonSet("날짜순", tag: SortType.date.rawValue),
+        buttonSet("가격높은순", tag: SortType.dsc.rawValue),
+        buttonSet("가격낮은순", tag: SortType.asc.rawValue)
+    ]
     
     lazy private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     
@@ -74,6 +84,7 @@ class SearchResultViewController: UIViewController {
         configureAsyncTask()
         configureStackView()
         configureCollectionView()
+        configureSortButtons()
         configureView()
     }
     
@@ -137,48 +148,37 @@ class SearchResultViewController: UIViewController {
     }
     
     private func configureStackView() {
-        sortStackView.addArrangedSubview(sortSimButton)
-        sortStackView.addArrangedSubview(sortDateButton)
-        sortStackView.addArrangedSubview(sortDscButton)
-        sortStackView.addArrangedSubview(sortAscButton)
+        sortButtons.forEach { button in
+            sortStackView.addArrangedSubview(button)
+        }
         
-        sortSimButton.snp.makeConstraints { make in
+        sortButtons[0].snp.makeConstraints { make in
             make.width.equalTo(55)
         }
         
-        sortDateButton.snp.makeConstraints { make in
+        sortButtons[1].snp.makeConstraints { make in
             make.width.equalTo(55)
         }
         
-        sortDscButton.snp.makeConstraints { make in
+        sortButtons[2].snp.makeConstraints { make in
             make.width.equalTo(80)
         }
         
-        sortAscButton.snp.makeConstraints { make in
+        sortButtons[3].snp.makeConstraints { make in
             make.width.equalTo(80)
         }
     }
     
-    private func selectedButtonSet(_ title: String) -> UIButton {
+    private func buttonSet(_ title: String, tag: Int) -> UIButton {
         let button = UIButton()
         button.layer.cornerRadius = 15
-        button.backgroundColor = .firstGray
-        button.setTitle(title, for: .normal)
-        button.titleLabel?.font = ViewConstant.Font.normal14
-        
-        return button
-    }
-    
-    private func unSelectedButtonSet(_ title: String) -> UIButton {
-        let button = UIButton()
         button.backgroundColor = .white
         button.setTitle(title, for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = ViewConstant.Font.normal14
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.layer.borderColor = UIColor.thirdGray.cgColor
         button.layer.borderWidth = 1
-        button.layer.cornerRadius = 15
-        
+        button.tag = tag
+        button.addTarget(self, action: #selector(sortButtonClicked), for: .touchUpInside)
         return button
     }
     
@@ -199,6 +199,34 @@ class SearchResultViewController: UIViewController {
         
         return layout
     }
+    
+    private func configureSortButtons() {
+        print(#function)
+        sortButtons.forEach { button in
+            let isSelected = button.tag == currentSortType.rawValue
+            button.backgroundColor = isSelected ? .firstGray : .white
+            button.setTitleColor(isSelected ? .white : .black, for: .normal)
+        }
+    }
+    
+    @objc func sortButtonClicked(_ sender: UIButton) {
+        if let selectedSortType = SortType(rawValue: sender.tag) {
+            currentSortType = selectedSortType
+            configureSortButtons()
+            // 데이터 초기화
+            responseList.items.removeAll()
+            collectionView.scrollToItem(at: IndexPath(item: -1, section: 0), at: .init(rawValue: 0), animated: true)
+            collectionView.reloadData()
+            page = 1
+            // 네트워크 요청
+            if let target = searchWord {
+                navigationItem.title = target
+                Task {
+                    await callRequest(query: target, sort: "\(selectedSortType)", page: page)
+                }
+            }
+        }
+    }
 }
 
 // 네트워크
@@ -212,6 +240,7 @@ extension SearchResultViewController {
         ]
         let para: Parameters = [
             "query": query,
+            "display":30,
             "sort": sort,
             "page": page,
         ]
@@ -258,12 +287,12 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         
         cell.productPriceLabel.text = formatStrToMoney(data.lprice)
         
-        var isBasketClicked = basketDictionary[indexPath.row] ?? false
+        let isBasketClicked = basketDictionary[indexPath.row] ?? false
         cell.basketButton.backgroundColor = isBasketClicked ? .white : .black.withAlphaComponent(0.5)
         cell.basketButton.tintColor = isBasketClicked ? .black : .white
+        cell.basketButton.setImage(isBasketClicked ? UIImage(named: "like_selected") : UIImage(named: "like_unselected") , for: .normal)
         cell.basketButton.tag = indexPath.row
         cell.basketButton.addTarget(self, action: #selector(basketButtonClicked), for: .touchUpInside)
-        
         return cell
         
         
