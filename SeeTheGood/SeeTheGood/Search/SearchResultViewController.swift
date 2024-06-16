@@ -17,7 +17,7 @@ final class SearchResultViewController: UIViewController {
     var searchWord: String?
     var sortWay: String = "sim"
     var page = 1
-    var basketDictionary: [Int: Bool] = [:]
+    var basketDictionary: [String: Bool] = [:]
     var currentSortType: SortType = .sim
     
     lazy var currentSearchQueryTotalPage: Int = {
@@ -280,7 +280,8 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         
         cell.productPriceLabel.text = formatStrToMoney(data.lprice)
         
-        let isBasketClicked = basketDictionary[indexPath.row] ?? false
+        let isBasketClicked = basketDictionary[data.productId] ?? false
+        
         cell.basketButton.backgroundColor = isBasketClicked ? .white : .black.withAlphaComponent(0.5)
         cell.basketButton.tintColor = isBasketClicked ? .black : .white
         cell.basketButton.setImage(isBasketClicked ? UIImage(named: "like_selected") : UIImage(named: "like_unselected") , for: .normal)
@@ -295,6 +296,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         let data = responseList.items[indexPath.row]
         vc.link = data.link
         vc.productTitle = cleanText(data.title)
+        vc.isBasketClicked = basketDictionary[data.productId]
         
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -323,7 +325,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     @objc func basketButtonClicked(_ sender: UIButton) {
         let index = sender.tag
         
-        basketDictionary[index] = !(basketDictionary[index] ?? false)
+        basketDictionary[responseList.items[index].productId] = !(basketDictionary[responseList.items[index].productId] ?? false)
         collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
     }
 }

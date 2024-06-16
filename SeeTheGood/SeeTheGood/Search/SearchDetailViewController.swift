@@ -14,7 +14,7 @@ final class SearchDetailViewController: UIViewController {
     
     var link: String?
     var productTitle: String?
-    var isSelected = false
+    var isBasketClicked: Bool?
     
     private let webView = WKWebView()
     private let topLineView = LineView()
@@ -43,8 +43,11 @@ final class SearchDetailViewController: UIViewController {
     
     private func configureNavigationBar() {
         navigationItem.title = productTitle
+
+        guard let isBasketClicked = isBasketClicked else { return }
+        
         let basket = UIBarButtonItem(
-            image: isSelected ? UIImage(named: "like_selected") : UIImage(named: "like_unselected"),
+            image: isBasketClicked ? UIImage(named: "like_selected") : UIImage(named: "like_unselected"),
             style: .plain,
             target: self,
             action: #selector(basketButtonClicked))
@@ -54,8 +57,7 @@ final class SearchDetailViewController: UIViewController {
     
     @objc func basketButtonClicked(_ sender: UIButton) {
         
-        print("크흠... 귀찮다")
-        isSelected.toggle()
+        print("크흠... 유저디폴트를 써야하나..")
     }
     
     private func configureLayout() {
