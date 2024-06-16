@@ -16,6 +16,7 @@ class SearchResultViewController: UIViewController {
     var searchWord: String?
     var sortWay: String = "sim"
     var page = 1
+    var basketDictionary: [Int: Bool] = [:]
     
     lazy var currentSearchQueryTotalPage: Int = {
         if responseList.display != 0 {
@@ -246,6 +247,8 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         let data = responseList.items[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
         let imageUrl = URL(string: data.image)
+        
+        
         cell.mainImageView.kf.setImage(with: imageUrl)
         cell.mallNameLabel.text = data.mallName
         cell.productTitle.text = cleanText(data.title)
@@ -254,7 +257,16 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         numberFormatter.numberStyle = .decimal
         
         cell.productPriceLabel.text = formatStrToMoney(data.lprice)
+        
+        var isBasketClicked = basketDictionary[indexPath.row] ?? false
+        cell.basketButton.backgroundColor = isBasketClicked ? .white : .black.withAlphaComponent(0.5)
+        cell.basketButton.tintColor = isBasketClicked ? .black : .white
+        cell.basketButton.tag = indexPath.row
+        cell.basketButton.addTarget(self, action: #selector(basketButtonClicked), for: .touchUpInside)
+        
         return cell
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -266,7 +278,6 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         var cleanText = regex.stringByReplacingMatches(in: text, options: [], range: NSRange(location: 0, length: text.utf16.count), withTemplate: "")
         
         cleanText = cleanText.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression, range: nil)
-        
         cleanText = cleanText.trimmingCharacters(in: .whitespacesAndNewlines)
         
         return cleanText
@@ -281,6 +292,13 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         } else {
             return price
         }
+    }
+    
+    @objc func basketButtonClicked(_ sender: UIButton) {
+        let index = sender.tag
+        
+        basketDictionary[index] = !(basketDictionary[index] ?? false)
+        collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
     }
 }
 

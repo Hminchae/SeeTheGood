@@ -21,8 +21,6 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
     let basketButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "basket.fill"), for: .normal)
-        button.tintColor = .white
-        button.backgroundColor = .black.withAlphaComponent(0.5)
         button.layer.cornerRadius = 8
         
         return button
