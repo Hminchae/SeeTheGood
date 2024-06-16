@@ -75,7 +75,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }
         
-        let vc = ModifyProfileViewController()
+        let vc = ProfileSettingViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
 }

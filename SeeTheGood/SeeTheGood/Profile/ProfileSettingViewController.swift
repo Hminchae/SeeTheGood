@@ -16,11 +16,15 @@ final class ProfileSettingViewController: UIViewController {
     var userSelectImageNum: Int?
     
     private var selectedImageNum: Int {
-        if let num = userSelectImageNum {
-            return num
+        if user.didInitialSetting {
+            return user.profileImageNum
         } else {
-            userSelectImageNum = Int.random(in: 0...11)
-            return userSelectImageNum!
+            if let num = userSelectImageNum {
+                return num
+            } else {
+                userSelectImageNum = Int.random(in: 0...11)
+                return userSelectImageNum!
+            }
         }
     }
     
@@ -73,30 +77,33 @@ final class ProfileSettingViewController: UIViewController {
     
     private var commentLabel = {
         let label = UILabel()
-        label.text = "닉네임에 @는 포함할 수 없어요."
         label.font = ViewConstant.Font.normal13
-        label.textColor = .point
         
         return label
     }()
     
     private let completeButton = OrangeButton(style: .complete)
     
+    private let bottomLineView = LineView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "PROFILE SETTING"
         
-        self.navigationController?.navigationBar.tintColor = .black
-        print(selectedImageNum)
+        configureNavigationBar()
         configureView()
-        navigationItem.backButtonTitle = ""
-        completeButton.addTarget(self, action: #selector(completeButtonClicked), for: .touchUpInside)
+        forkTwoCases()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         addBottomBorderToTextField(textField: nickNameTextField)
+    }
+    
+    private func configureNavigationBar() {
+
+        navigationItem.backButtonTitle = ""
+        self.navigationController?.navigationBar.tintColor = .black
     }
     
     private func configureView() {
@@ -105,10 +112,60 @@ final class ProfileSettingViewController: UIViewController {
         view.addSubview(profileCameraCircleView)
         view.addSubview(nickNameTextField)
         view.addSubview(commentLabel)
-        view.addSubview(completeButton)
-        
+
+
         configureCameraCircleView()
         configureLayout()
+    }
+    
+    // 분기처리 관련
+    private func forkTwoCases() {
+        if user.didInitialSetting {
+            title = "EDIT PROFILE"
+            let save = UIBarButtonItem(
+                title: "저장",
+                style: .plain,
+                target: self,
+                action: #selector(saveButtonClicked))
+            
+            navigationItem.rightBarButtonItem = save
+            
+            commentLabel.textColor = .black
+            commentLabel.text = "사용 가능한 닉네임입니다 :D"
+            
+            nickNameTextField.text = user.nickName
+            
+            view.addSubview(bottomLineView)
+            bottomLineView.snp.makeConstraints { make in
+                make.bottom.equalTo(view.safeAreaLayoutGuide)
+                make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+                make.height.equalTo(1)
+            }
+        } else {
+            title = "PROFILE SETTING"
+            view.addSubview(completeButton)
+            
+            completeButton.addTarget(self, action: #selector(completeButtonClicked), for: .touchUpInside)
+            completeButton.snp.makeConstraints { make in
+                make.top.equalTo(commentLabel.snp.bottom).offset(30)
+                make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
+                make.height.equalTo(50)
+            }
+            
+            commentLabel.textColor = .point
+            commentLabel.text = "닉네임에 @는 포함할 수 없어요."
+        }
+    }
+    
+    @objc private func saveButtonClicked() {
+        if let nickName = nickNameTextField.text, !nickName.isEmpty {
+            if isNickNameChecked(nickName) {
+                user.nickName = nickName
+                user.profileImageNum = selectedImageNum
+                
+                navigationController?.popViewController(animated: true)
+            }
+        }
     }
     
     private func configureLayout() {
@@ -141,11 +198,7 @@ final class ProfileSettingViewController: UIViewController {
             make.height.equalTo(15)
         }
         
-        completeButton.snp.makeConstraints { make in
-            make.top.equalTo(commentLabel.snp.bottom).offset(30)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
-            make.height.equalTo(50)
-        }
+       
     }
     
     private func configureCameraCircleView() {
@@ -162,7 +215,7 @@ final class ProfileSettingViewController: UIViewController {
                               y: textField.frame.size.height - 1,
                               width: textField.frame.width,
                               height: 1)
-        border.backgroundColor = UIColor.thirdGray.cgColor
+        border.backgroundColor = user.didInitialSetting ? UIColor.black.cgColor : UIColor.thirdGray.cgColor
         textField.layer.addSublayer(border)
     }
     
