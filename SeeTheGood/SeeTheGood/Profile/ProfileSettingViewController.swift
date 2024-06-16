@@ -16,7 +16,11 @@ final class ProfileSettingViewController: UIViewController {
     
     private var selectedImageNum: Int {
         if user.didInitialSetting {
-            return user.profileImageNum
+            if let num = userSelectImageNum {
+                return num
+            } else {
+                return user.profileImageNum
+            }
         } else {
             if let num = userSelectImageNum {
                 return num
