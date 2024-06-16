@@ -174,11 +174,11 @@ class SearchResultViewController: UIViewController {
     
     private func collectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
-        let sectionSpacing: CGFloat = 15
-        let cellSpacing: CGFloat = 15
+        let sectionSpacing: CGFloat = 6
+        let cellSpacing: CGFloat = 14
         let width = UIScreen.main.bounds.width - (sectionSpacing * 2) - (cellSpacing * 3)
         
-        layout.itemSize = CGSize(width: width/2, height: width * 1.5)
+        layout.itemSize = CGSize(width: width/2, height: width * 0.85)
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = cellSpacing
         layout.minimumInteritemSpacing = cellSpacing
@@ -238,12 +238,40 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
         let imageUrl = URL(string: data.image)
         cell.mainImageView.kf.setImage(with: imageUrl)
+        cell.mallNameLabel.text = data.mallName
+        cell.productTitle.text = cleanText(data.title)
         
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        
+        cell.productPriceLabel.text = formatStrToMoney(data.lprice)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+    }
+    
+    func cleanText(_ text: String) -> String {
+        let regex = try! NSRegularExpression(pattern: "<[^>]+>", options: [])
+        var cleanText = regex.stringByReplacingMatches(in: text, options: [], range: NSRange(location: 0, length: text.utf16.count), withTemplate: "")
+        
+        cleanText = cleanText.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression, range: nil)
+        
+        cleanText = cleanText.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        return cleanText
+    }
+    
+    func formatStrToMoney(_ price: String) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        
+        if let number = Int(price) {
+            return "\(formatter.string(from: NSNumber(value: number)) ?? price)원"
+        } else {
+            return price 
+        }
     }
 }
 
