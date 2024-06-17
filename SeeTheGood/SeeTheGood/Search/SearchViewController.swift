@@ -13,6 +13,7 @@ import Alamofire
 final class SearchViewController: UIViewController {
     
     private let user = UserDefaultManager.shared
+    
     lazy private var list: [String] = user.mySearchList
     
     private let searchBar = {
@@ -75,6 +76,8 @@ final class SearchViewController: UIViewController {
                               display: 0,
                               items: [])
     
+    lazy private var tapGesture = UITapGestureRecognizer(target: self, action: #selector(anyTapped))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "\(user.nickName)'s See The Good"
@@ -101,21 +104,28 @@ final class SearchViewController: UIViewController {
                               display: 0,
                               items: [])
         list = user.mySearchList
+        configureWhichView()
         tableView.reloadData()
     }
     
     private func configureView() {
+        tapGesture.cancelsTouchesInView = false // 모든 터치를 전달 받도록 해주는 속성
+        view.addGestureRecognizer(tapGesture)
+        
         view.addSubview(searchBar)
         view.addSubview(topLineView)
+        configureWhichView()
+        view.addSubview(bottomLineView)
         
+        configureLayout()
+    }
+
+    private func configureWhichView() {
         if list.isEmpty {
             configureEmptyView()
         } else {
             configureNotEmptyView()
         }
-        
-        view.addSubview(bottomLineView)
-        configureLayout()
     }
     
     private func configureLayout() {
@@ -193,7 +203,12 @@ final class SearchViewController: UIViewController {
     @objc private func deleteAllButtonClicked() {
         UserDefaults.standard.removeObject(forKey: "mySearchList")
         list = user.mySearchList
+        configureWhichView()
         tableView.reloadData()
+    }
+    
+    @objc private func anyTapped() {
+        searchBar.endEditing(true)
     }
 }
 
@@ -229,15 +244,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    @objc func xButtonClicked(_ sender: UIButton) {
-        let index = sender.tag
-        var mySearchList = user.mySearchList
-        mySearchList.remove(at: mySearchList.count - index - 1)
-        user.mySearchList = mySearchList
-        list = user.mySearchList
-        tableView.reloadData()
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         defer {
             tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -248,5 +254,15 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         vc.searchWord = target
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func xButtonClicked(_ sender: UIButton) {
+        let index = sender.tag
+        var mySearchList = user.mySearchList
+        mySearchList.remove(at: mySearchList.count - index - 1)
+        user.mySearchList = mySearchList
+        list = user.mySearchList
+        configureWhichView()
+        tableView.reloadData()
     }
 }
