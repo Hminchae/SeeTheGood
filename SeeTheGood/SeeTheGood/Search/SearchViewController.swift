@@ -16,10 +16,11 @@ final class SearchViewController: UIViewController {
     
     lazy private var list: [String] = user.mySearchList
     
-    private let searchBar = {
+    lazy private var searchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "브랜드, 상품 등을 입력하세요."
         searchBar.searchBarStyle = .minimal
+        searchBar.searchTextField.addTarget(self, action: #selector(searchBarTextDidChange), for: .editingChanged)
         
         return searchBar
     }()
@@ -240,7 +241,17 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.xButton.addTarget(self, action: #selector(xButtonClicked), for: .touchUpInside)
         cell.xButton.tag = indexPath.row
         
+        if let targetText = searchBar.text, !targetText.isEmpty, let listText = cell.searchRecordLabel.text {
+            cell.searchRecordLabel.setHighlighted(listText, with: targetText)
+        }
+        
         return cell
+    }
+    
+    @objc func searchBarTextDidChange(_ searchBar: UISearchBar) {
+        guard let target = searchBar.text else { return }
+        
+        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
