@@ -140,10 +140,12 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         let confirm = UIAlertAction(
             title: "확인",
             style: .default) { action in
-                self.user.nickName = "사용자"
+                self.user.nickName.removeAll()
                 self.user.profileImageNum = 0
                 self.user.didInitialSetting = false
-                self.user.signUpDate = "가입정보없음"
+                self.user.signUpDate.removeAll()
+                self.user.basketItems = []
+                self.user.mySearchList = []
                 self.popTheOnboardingView()
             }
         let cancel = UIAlertAction(

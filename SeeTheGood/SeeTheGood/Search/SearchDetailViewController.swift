@@ -65,10 +65,13 @@ final class SearchDetailViewController: UIViewController {
         
         if let id = productId {
             if tempBasketState {
-                user.basketItems.append(id)
-                user.basketItems = Array(Set(user.basketItems))
+                var tempArr = user.basketItems
+                tempArr.append(id)
+                user.basketItems = Array(Set(tempArr))
             } else {
-                user.basketItems.removeAll { $0 == id }
+                var tempArr = user.basketItems
+                tempArr.removeAll { $0 == id }
+                user.basketItems = Array(Set(tempArr))
             }
         }
     }

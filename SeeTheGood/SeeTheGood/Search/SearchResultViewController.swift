@@ -85,12 +85,7 @@ final class SearchResultViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let items = user.basketItems
-
-        for item in items {
-            basketDictionary[item] = true
-        }
-        
+        basketStateSyncOnDefault()
         collectionView.reloadData()
     }
     
@@ -103,6 +98,16 @@ final class SearchResultViewController: UIViewController {
         list = list.filter { !falseList.contains($0) }
         list.append(contentsOf: trueList)
         user.basketItems = Array(Set(list))
+    }
+    
+    private func basketStateSyncOnDefault() {
+        let items = user.basketItems
+        
+        basketDictionary = [:]
+        for item in responseList.items {
+            let id = item.productId
+            basketDictionary[id] = items.contains(id)
+        }
     }
     
     private func configureCollectionView() {
@@ -272,6 +277,7 @@ extension SearchResultViewController {
                 print("SUCCESS")
                 self.responseList.items.append(contentsOf: value.items)
                 self.totalSearchResultLabel.text = "\(value.total)개의 검색 결과"
+                self.basketStateSyncOnDefault()
                 self.collectionView.reloadData()
             case .failure(let error):
                 print("Failed")
