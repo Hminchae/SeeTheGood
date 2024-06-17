@@ -85,17 +85,17 @@ final class SearchResultViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(#function)
-        for item in user.basketItems {
+        let items = user.basketItems
+
+        for item in items {
             basketDictionary[item] = true
         }
-
+        
         collectionView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print(#function)
         var list = user.basketItems
         let trueList = basketDictionary.filter { $0.value }.map { $0.key }
         let falseList = basketDictionary.filter { !$0.value }.map { $0.key }
@@ -197,6 +197,7 @@ final class SearchResultViewController: UIViewController {
         button.layer.borderWidth = 1
         button.tag = tag
         button.addTarget(self, action: #selector(sortButtonClicked), for: .touchUpInside)
+        
         return button
     }
     
@@ -219,7 +220,6 @@ final class SearchResultViewController: UIViewController {
     }
     
     private func configureSortButtons() {
-        print(#function)
         sortButtons.forEach { button in
             let isSelected = button.tag == currentSortType.rawValue
             button.backgroundColor = isSelected ? .firstGray : .white
@@ -287,11 +287,9 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print(#function)
         let data = responseList.items[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
         let imageUrl = URL(string: data.image)
-        
         
         cell.mainImageView.kf.setImage(with: imageUrl)
         cell.mallNameLabel.text = data.mallName
@@ -320,6 +318,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         vc.link = data.link
         vc.productTitle = cleanText(data.title)
         vc.isBasketClicked = basketDictionary[data.productId]
+        vc.productId = data.productId
         
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -370,7 +369,6 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
     
     // 취소기능
     func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
-        print("취소", indexPaths)
         indexPaths.forEach { indexPath in
             if let cell = collectionView.cellForItem(at: indexPath) as? SearchResultCollectionViewCell {
                 cell.mainImageView.kf.cancelDownloadTask()

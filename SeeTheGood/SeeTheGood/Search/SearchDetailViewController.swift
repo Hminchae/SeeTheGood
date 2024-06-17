@@ -15,6 +15,10 @@ final class SearchDetailViewController: UIViewController {
     var link: String?
     var productTitle: String?
     var isBasketClicked: Bool?
+    var productId: String?
+    
+    private var tempBasketState = false
+    private var user = UserDefaultManager.shared
     
     private let webView = WKWebView()
     private let topLineView = LineView()
@@ -30,6 +34,9 @@ final class SearchDetailViewController: UIViewController {
             let request = URLRequest(url: url)
             webView.load(request)
         }
+        
+        tempBasketState = isBasketClicked ?? false
+        configureNavigationBar()
     }
     
     private func configureView() {
@@ -37,17 +44,14 @@ final class SearchDetailViewController: UIViewController {
         view.addSubview(topLineView)
         view.addSubview(bottomLineView)
         
-        configureNavigationBar()
         configureLayout()
     }
     
     private func configureNavigationBar() {
         navigationItem.title = productTitle
 
-        guard let isBasketClicked = isBasketClicked else { return }
-        
         let basket = UIBarButtonItem(
-            image: isBasketClicked ? UIImage(named: "like_selected") : UIImage(named: "like_unselected"),
+            image: tempBasketState ? UIImage(named: "like_selected") : UIImage(named: "like_unselected"),
             style: .plain,
             target: self,
             action: #selector(basketButtonClicked))
@@ -55,9 +59,18 @@ final class SearchDetailViewController: UIViewController {
         navigationItem.rightBarButtonItem = basket
     }
     
-    @objc func basketButtonClicked(_ sender: UIButton) {
+    @objc func basketButtonClicked(_ sender: UIButton) { // true 면 디폴트에 넣고, false 면 제거한다.
+        tempBasketState.toggle()
+        configureNavigationBar()
         
-        print("크흠... 유저디폴트를 써야하나..")
+        if let id = productId {
+            if tempBasketState {
+                user.basketItems.append(id)
+                user.basketItems = Array(Set(user.basketItems))
+            } else {
+                user.basketItems.removeAll { $0 == id }
+            }
+        }
     }
     
     private func configureLayout() {

@@ -230,7 +230,6 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(list.count)
         return list.count
     }
     
