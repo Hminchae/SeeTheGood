@@ -33,11 +33,12 @@ final class SettingViewController: UIViewController {
         configureView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         tableView.reloadRows(at: [[0, 0]], with: .none)
         tableView.reloadRows(at: [[1, 0]], with: .none)
     }
-    
+
     private func configureView() {
         navigationItem.title = "SETTING"
         view.addSubview(tableView)
@@ -104,7 +105,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             cell.listTitleLabel.text = SettingList.allCases[indexPath.row].rawValue
-            
             return cell
         default:
             fatalError("error")
@@ -112,11 +112,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        defer {
-            if indexPath != [1, 0] {
-                tableView.reloadRows(at: [indexPath], with: .automatic)
-            }
-        }
         switch indexPath.section {
         case 0:
             let vc = ProfileSettingViewController()
@@ -133,6 +128,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             fatalError("error")
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func alertWithdraw() {

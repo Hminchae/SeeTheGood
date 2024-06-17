@@ -82,7 +82,7 @@ final class SettingListTableViewCell: UITableViewCell {
         basketIconImageView.snp.makeConstraints { make in
             make.verticalEdges.equalTo(contentView.snp.verticalEdges).inset(15)
             make.trailing.equalTo(productCountLabel.snp.leading).offset(-5)
-            make.size.equalTo(20).priority(.high)
+            make.size.equalTo(18).priority(.high)
         }
     }
 }
