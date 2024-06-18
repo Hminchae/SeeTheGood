@@ -9,7 +9,9 @@ import UIKit
 
 import Alamofire
 import Kingfisher
+import SkeletonView
 import SnapKit
+import Toast
 
 final class SearchResultViewController: UIViewController {
     
@@ -115,6 +117,8 @@ final class SearchResultViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.prefetchDataSource = self
+        collectionView.isSkeletonable = true
+        collectionView.showAnimatedGradientSkeleton()
         
         collectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
     }
@@ -279,7 +283,18 @@ extension SearchResultViewController {
                 self.totalSearchResultLabel.text = "\(value.total)개의 검색 결과"
                 self.basketStateSyncOnDefault()
                 self.collectionView.reloadData()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.collectionView.stopSkeletonAnimation()
+                    self.collectionView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+                }
             case .failure(let error):
+                self.view.makeToast("데이터를 받아오는데 실패했습니다.", duration: 5.0, position: .bottom, title: .none, image: .none) { didTap in
+                    if didTap {
+                        print("completion from tap")
+                    } else {
+                        print("completion without tap")
+                    }
+                }
                 print("Failed")
                 print(error)
             }
@@ -382,5 +397,15 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
                 cell.mainImageView.kf.cancelDownloadTask()
             }
         }
+    }
+}
+
+extension SearchResultViewController: SkeletonCollectionViewDelegate, SkeletonCollectionViewDataSource {
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> SkeletonView.ReusableCellIdentifier {
+        SearchResultCollectionViewCell.identifier
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
     }
 }

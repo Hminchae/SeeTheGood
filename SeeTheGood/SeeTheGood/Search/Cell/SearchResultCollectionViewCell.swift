@@ -7,6 +7,8 @@
 
 import UIKit
 
+import SkeletonView
+
 final class SearchResultCollectionViewCell: UICollectionViewCell {
     
     let mainImageView = {
@@ -14,6 +16,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
+        imageView.isSkeletonable = true
         
         return imageView
     }()
@@ -21,7 +24,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
     let basketButton = {
         let button = UIButton()
         button.layer.cornerRadius = 8
-        
+        button.isSkeletonable = true
         return button
     }()
     
@@ -30,7 +33,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
         label.font = ViewConstant.Font.normal13
         label.textColor = .secondGray
         label.textAlignment = .left
-        
+        label.isSkeletonable = true
         return label
     }()
     
@@ -40,7 +43,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
         label.textColor = .black
         label.textAlignment = .left
         label.numberOfLines = 2
-        
+        label.isSkeletonable = true
         return label
     }()
     
@@ -49,13 +52,13 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
         label.font = ViewConstant.Font.heavy15
         label.textColor = .black
         label.textAlignment = .left
-        
+        label.isSkeletonable = true
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        isSkeletonable = true
         contentView.addSubview(mainImageView)
         contentView.addSubview(basketButton)
         contentView.addSubview(mallNameLabel)
