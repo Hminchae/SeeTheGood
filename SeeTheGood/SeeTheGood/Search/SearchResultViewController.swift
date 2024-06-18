@@ -252,6 +252,8 @@ final class SearchResultViewController: UIViewController {
                     await callRequest(query: target, sort: "\(selectedSortType)", page: page)
                 }
             }
+            collectionView.isSkeletonable = true
+            collectionView.showAnimatedGradientSkeleton()
         }
     }
 }
@@ -283,7 +285,7 @@ extension SearchResultViewController {
                 self.totalSearchResultLabel.text = "\(value.total)개의 검색 결과"
                 self.basketStateSyncOnDefault()
                 self.collectionView.reloadData()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.collectionView.stopSkeletonAnimation()
                     self.collectionView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
                 }
