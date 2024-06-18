@@ -314,9 +314,11 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         cell.basketButton.tag = indexPath.row
         cell.basketButton.addTarget(self, action: #selector(basketButtonClicked), for: .touchUpInside)
         
+        // 키워드 하이라이팅
         if let target = searchWord, let productText = cell.productTitle.text {
             cell.productTitle.setHighlighted(productText, with: target)
         }
+        
         return cell
     }
     
@@ -334,7 +336,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     
     private func cleanText(_ text: String) -> String {
         let regex = try! NSRegularExpression(pattern: "<[^>]+>", options: [])
-        var cleanText = regex.stringByReplacingMatches(in: text, options: [], range: NSRange(location: 0, length: text.utf16.count), withTemplate: "")
+        let cleanText = regex.stringByReplacingMatches(in: text, options: [], range: NSRange(location: 0, length: text.utf16.count), withTemplate: "")
         
         return cleanText
     }
@@ -382,15 +384,3 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
         }
     }
 }
-
-
-//if let targetText = searchBar.text, !targetText.isEmpty, let listText = cell.searchRecordLabel.text {
-//    cell.searchRecordLabel.setHighlighted(listText, with: targetText)
-//}
-//
-//
-//@objc func searchBarTextDidChange(_ searchBar: UISearchBar) {
-//    guard let target = searchBar.text, !target.isEmpty else { return }
-//    
-//    tableView.reloadData()
-//}

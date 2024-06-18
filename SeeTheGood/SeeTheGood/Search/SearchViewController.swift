@@ -216,7 +216,15 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let target = searchBar.text else { return }
         
-        user.mySearchList.append(target)
+        if !user.mySearchList.contains(target) {
+            user.mySearchList.append(target)
+        } else {
+            var tempArr: [String] = user.mySearchList
+            tempArr = tempArr.filter { $0 != target }
+            tempArr.append(target)
+            user.mySearchList = tempArr
+        }
+        
         tableView.reloadData()
         
         let vc = SearchResultViewController()
