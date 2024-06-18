@@ -13,11 +13,12 @@ import Foundation
  - 프로필 사진 넘버
  - 초기 셋팅 여부
  - 가입 날짜
- - 장바구니 아이템 ID 배열(순서 상관x)
+ - 장바구니 아이템 ID 배열(순서 상관x, 중복 허용x)
  - 검색어 list(순서 상관O, 중복 허용x)
  */
 
-class UserDefaultManager {
+final class UserDefaultManager {
+    
     static let shared = UserDefaultManager()
     
     private init() { }

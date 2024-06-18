@@ -79,7 +79,7 @@ final class ProfileImageSettingViewController: UIViewController {
         collectionView.register(ProfileImageCollectionViewCell.self, forCellWithReuseIdentifier: ProfileImageCollectionViewCell.identifier)
         collectionView.backgroundColor = .clear
     }
-
+    
     private func configureLayout() {
         lineView.snp.makeConstraints { make in
             make.horizontalEdges.top.equalTo(view.safeAreaLayoutGuide)
@@ -145,7 +145,7 @@ extension ProfileImageSettingViewController: UICollectionViewDelegate, UICollect
             cell.profileImage.layer.borderColor = UIColor.thirdGray.cgColor
             cell.profileImage.layer.borderWidth = ViewConstant.BorderWidth.unSelectedProfile
         }
-
+        
         return cell
     }
     
@@ -153,7 +153,7 @@ extension ProfileImageSettingViewController: UICollectionViewDelegate, UICollect
         selectedImageNum = indexPath.row
         collectionView.reloadData()
         profileImageView.image = UIImage(named: "profile_\(indexPath.row)")
-        onImageSelect?(indexPath.row) 
+        onImageSelect?(indexPath.row)
     }
 }
 

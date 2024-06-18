@@ -38,7 +38,7 @@ final class SettingViewController: UIViewController {
         tableView.reloadRows(at: [[0, 0]], with: .none)
         tableView.reloadRows(at: [[1, 0]], with: .none)
     }
-
+    
     private func configureView() {
         navigationItem.title = "SETTING"
         view.addSubview(tableView)

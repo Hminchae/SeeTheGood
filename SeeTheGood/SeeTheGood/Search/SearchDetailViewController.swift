@@ -12,14 +12,14 @@ import SnapKit
 
 final class SearchDetailViewController: UIViewController {
     
+    private var user = UserDefaultManager.shared
+    
     var link: String?
     var productTitle: String?
     var isBasketClicked: Bool?
     var productId: String?
     
     private var tempBasketState = false
-    private var user = UserDefaultManager.shared
-    
     private let webView = WKWebView()
     private let topLineView = LineView()
     private let bottomLineView = LineView()
@@ -49,7 +49,7 @@ final class SearchDetailViewController: UIViewController {
     
     private func configureNavigationBar() {
         navigationItem.title = productTitle
-
+        
         let basket = UIBarButtonItem(
             image: tempBasketState ? UIImage(named: "like_selected") : UIImage(named: "like_unselected"),
             style: .plain,

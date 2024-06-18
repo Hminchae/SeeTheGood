@@ -9,8 +9,8 @@ import UIKit
 
 import SnapKit
 
-class SearchTableViewCell: UITableViewCell {
-
+final class SearchTableViewCell: UITableViewCell {
+    
     private let clockIconImageView = {
         let imageView = UIImageView()
         let configuration = UIImage.SymbolConfiguration(pointSize: 20, weight: .heavy)

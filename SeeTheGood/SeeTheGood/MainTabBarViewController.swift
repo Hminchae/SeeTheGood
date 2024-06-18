@@ -26,7 +26,7 @@ class MainTabBarViewController: UITabBarController {
         
         let appearance = UITabBarAppearance()
         
-        appearance.shadowColor = UIColor.clear
+        appearance.shadowColor = .clear
         appearance.backgroundColor = .white
         
         tabBar.standardAppearance = appearance

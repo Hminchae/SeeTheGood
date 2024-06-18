@@ -12,6 +12,7 @@ import SnapKit
 final class ProfileSettingViewController: UIViewController {
     
     private let user = UserDefaultManager.shared
+    
     var userSelectImageNum: Int?
     
     private var selectedImageNum: Int {
@@ -249,7 +250,7 @@ final class ProfileSettingViewController: UIViewController {
         }
     }
     
-    @objc func textFieldDidChange(_ textField: UITextField) {
+    @objc private func textFieldDidChange(_ textField: UITextField) {
         guard let nickName = nickNameTextField.text else { return }
         
         if nickName.count < 2 || nickName.count >= 10 {

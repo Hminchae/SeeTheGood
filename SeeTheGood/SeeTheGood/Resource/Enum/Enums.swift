@@ -52,11 +52,6 @@ enum SortType: Int {
 }
 
 // 설정 리스트
-enum SettingSections {
-    case profileSetting
-    case settingList
-}
-
 enum SettingList: String, CaseIterable {
     case basketList = "나의 장바구니 목록"
     case fnq = "자주 묻는 질문"

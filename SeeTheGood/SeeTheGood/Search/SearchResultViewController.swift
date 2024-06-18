@@ -13,12 +13,12 @@ import SnapKit
 
 final class SearchResultViewController: UIViewController {
     
+    private var user = UserDefaultManager.shared
+    
     var searchWord: String?
     var page = 1
     var basketDictionary: [String: Bool] = [:]
     var currentSortType: SortType = .sim
-    
-    private var user = UserDefaultManager.shared
     
     lazy var currentSearchQueryTotalPage: Int = {
         if responseList.display != 0 {
@@ -232,7 +232,7 @@ final class SearchResultViewController: UIViewController {
         }
     }
     
-    @objc func sortButtonClicked(_ sender: UIButton) {
+    @objc private func sortButtonClicked(_ sender: UIButton) {
         if let selectedSortType = SortType(rawValue: sender.tag) {
             currentSortType = selectedSortType
             configureSortButtons()
@@ -314,6 +314,9 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         cell.basketButton.tag = indexPath.row
         cell.basketButton.addTarget(self, action: #selector(basketButtonClicked), for: .touchUpInside)
         
+        if let target = searchWord, let productText = cell.productTitle.text {
+            cell.productTitle.setHighlighted(productText, with: target)
+        }
         return cell
     }
     
@@ -329,17 +332,14 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func cleanText(_ text: String) -> String {
+    private func cleanText(_ text: String) -> String {
         let regex = try! NSRegularExpression(pattern: "<[^>]+>", options: [])
         var cleanText = regex.stringByReplacingMatches(in: text, options: [], range: NSRange(location: 0, length: text.utf16.count), withTemplate: "")
-        
-        cleanText = cleanText.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression, range: nil)
-        cleanText = cleanText.trimmingCharacters(in: .whitespacesAndNewlines)
         
         return cleanText
     }
     
-    func formatStrToMoney(_ price: String) -> String {
+    private func formatStrToMoney(_ price: String) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         
@@ -350,7 +350,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         }
     }
     
-    @objc func basketButtonClicked(_ sender: UIButton) {
+    @objc private func basketButtonClicked(_ sender: UIButton) {
         let index = sender.tag
         let targetId = responseList.items[index].productId
         
@@ -382,3 +382,15 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
         }
     }
 }
+
+
+//if let targetText = searchBar.text, !targetText.isEmpty, let listText = cell.searchRecordLabel.text {
+//    cell.searchRecordLabel.setHighlighted(listText, with: targetText)
+//}
+//
+//
+//@objc func searchBarTextDidChange(_ searchBar: UISearchBar) {
+//    guard let target = searchBar.text, !target.isEmpty else { return }
+//    
+//    tableView.reloadData()
+//}

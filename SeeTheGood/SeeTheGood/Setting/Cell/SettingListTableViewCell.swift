@@ -54,7 +54,7 @@ final class SettingListTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureNormalCell() {
+    private func configureNormalCell() {
         contentView.addSubview(listTitleLabel)
         
         listTitleLabel.snp.makeConstraints { make in

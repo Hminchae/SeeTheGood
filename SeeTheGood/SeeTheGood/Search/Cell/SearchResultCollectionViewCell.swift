@@ -55,7 +55,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-    
+        
         contentView.addSubview(mainImageView)
         contentView.addSubview(basketButton)
         contentView.addSubview(mallNameLabel)

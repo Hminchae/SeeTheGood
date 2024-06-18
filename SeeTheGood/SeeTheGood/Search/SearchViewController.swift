@@ -16,11 +16,10 @@ final class SearchViewController: UIViewController {
     
     lazy private var list: [String] = user.mySearchList
     
-    lazy private var searchBar = {
+    private var searchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "브랜드, 상품 등을 입력하세요."
         searchBar.searchBarStyle = .minimal
-        searchBar.searchTextField.addTarget(self, action: #selector(searchBarTextDidChange), for: .editingChanged)
         
         return searchBar
     }()
@@ -66,7 +65,7 @@ final class SearchViewController: UIViewController {
         
         return button
     }()
-
+    
     private let tableView = UITableView()
     
     private let bottomLineView = LineView()
@@ -82,6 +81,7 @@ final class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "\(user.nickName)'s See The Good"
+        navigationItem.backButtonTitle = ""
         view.backgroundColor = .white
         
         tableView.delegate = self
@@ -91,10 +91,6 @@ final class SearchViewController: UIViewController {
         tableView.rowHeight = 40
         
         searchBar.delegate = self
-        
-        configureView()
-        
-        navigationItem.backButtonTitle = ""
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -109,24 +105,24 @@ final class SearchViewController: UIViewController {
         tableView.reloadData()
     }
     
-    private func configureView() {
-        tapGesture.cancelsTouchesInView = false // 모든 터치를 전달 받도록 해주는 속성
-        view.addGestureRecognizer(tapGesture)
-        
-        view.addSubview(searchBar)
-        view.addSubview(topLineView)
-        configureWhichView()
-        view.addSubview(bottomLineView)
-        
-        configureLayout()
-    }
-
     private func configureWhichView() {
+        view.snp.removeConstraints()
         if list.isEmpty {
             configureEmptyView()
         } else {
             configureNotEmptyView()
         }
+    }
+    
+    private func configureView() {
+        tapGesture.cancelsTouchesInView = false // 모든 터치를 전달 받도록 해주는 속성
+        view.addGestureRecognizer(tapGesture)
+    
+        view.addSubview(searchBar)
+        view.addSubview(topLineView)
+        view.addSubview(bottomLineView)
+        
+        configureLayout()
     }
     
     private func configureLayout() {
@@ -143,13 +139,14 @@ final class SearchViewController: UIViewController {
         }
         
         bottomLineView.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(view.snp.bottom)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(1)
         }
     }
     
     private func configureEmptyView() {
+        configureView()
         emptyView.addSubview(emptyImageView)
         emptyView.addSubview(emptyLabel)
         view.addSubview(emptyView)
@@ -174,6 +171,7 @@ final class SearchViewController: UIViewController {
         notEmptyView.addSubview(deleteAllButton)
         notEmptyView.addSubview(tableView)
         view.addSubview(notEmptyView)
+        configureView()
         
         recentSearchLabel.snp.makeConstraints { make in
             make.top.equalTo(notEmptyView.snp.top).offset(15)
@@ -241,17 +239,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.xButton.addTarget(self, action: #selector(xButtonClicked), for: .touchUpInside)
         cell.xButton.tag = indexPath.row
         
-        if let targetText = searchBar.text, !targetText.isEmpty, let listText = cell.searchRecordLabel.text {
-            cell.searchRecordLabel.setHighlighted(listText, with: targetText)
-        }
-        
         return cell
-    }
-    
-    @objc func searchBarTextDidChange(_ searchBar: UISearchBar) {
-        guard let target = searchBar.text else { return }
-        
-        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -269,10 +257,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     @objc private func xButtonClicked(_ sender: UIButton) {
         let index = sender.tag
         var mySearchList = user.mySearchList
+        
         mySearchList.remove(at: mySearchList.count - index - 1)
         user.mySearchList = mySearchList
         list = user.mySearchList
         configureWhichView()
+        
         tableView.reloadData()
     }
 }

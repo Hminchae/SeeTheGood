@@ -36,8 +36,8 @@
 		B1642DDB2C1EAB80003032F9 /* SearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DDA2C1EAB80003032F9 /* SearchDetailViewController.swift */; };
 		B1642DDE2C1EECE6003032F9 /* UserProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DDD2C1EECE6003032F9 /* UserProfileTableViewCell.swift */; };
 		B1642DE02C1EED6A003032F9 /* SettingListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DDF2C1EED6A003032F9 /* SettingListTableViewCell.swift */; };
-		B1642DE42C1F4910003032F9 /* Basket.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DE32C1F4910003032F9 /* Basket.swift */; };
 		B1642E0E2C207CF0003032F9 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642E0D2C207CF0003032F9 /* UILabel+Extension.swift */; };
+		B1642E112C208A0D003032F9 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = B1642E102C208A0D003032F9 /* SkeletonView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,7 +68,6 @@
 		B1642DDA2C1EAB80003032F9 /* SearchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailViewController.swift; sourceTree = "<group>"; };
 		B1642DDD2C1EECE6003032F9 /* UserProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTableViewCell.swift; sourceTree = "<group>"; };
 		B1642DDF2C1EED6A003032F9 /* SettingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListTableViewCell.swift; sourceTree = "<group>"; };
-		B1642DE32C1F4910003032F9 /* Basket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basket.swift; sourceTree = "<group>"; };
 		B1642E0D2C207CF0003032F9 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,6 +80,7 @@
 				B1642DB62C1B0843003032F9 /* SnapKit in Frameworks */,
 				B1642DAD2C1B081E003032F9 /* Toast in Frameworks */,
 				B1642DB02C1B082C003032F9 /* Alamofire in Frameworks */,
+				B1642E112C208A0D003032F9 /* SkeletonView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,7 +170,6 @@
 			isa = PBXGroup;
 			children = (
 				B1642DD12C1C8F37003032F9 /* Search.swift */,
-				B1642DE32C1F4910003032F9 /* Basket.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -255,6 +254,7 @@
 				B1642DAF2C1B082C003032F9 /* Alamofire */,
 				B1642DB22C1B0836003032F9 /* Kingfisher */,
 				B1642DB52C1B0843003032F9 /* SnapKit */,
+				B1642E102C208A0D003032F9 /* SkeletonView */,
 			);
 			productName = SeeTheGood;
 			productReference = B1642D862C1AF24C003032F9 /* SeeTheGood.app */;
@@ -289,6 +289,7 @@
 				B1642DAE2C1B082C003032F9 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				B1642DB12C1B0836003032F9 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				B1642DB42C1B0843003032F9 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				B1642E0F2C208A0D003032F9 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			productRefGroup = B1642D872C1AF24C003032F9 /* Products */;
 			projectDirPath = "";
@@ -325,7 +326,6 @@
 				B1642DCD2C1C584A003032F9 /* SettingViewController.swift in Sources */,
 				B1642DDB2C1EAB80003032F9 /* SearchDetailViewController.swift in Sources */,
 				B1642DDE2C1EECE6003032F9 /* UserProfileTableViewCell.swift in Sources */,
-				B1642DE42C1F4910003032F9 /* Basket.swift in Sources */,
 				B1642DBC2C1BDF9D003032F9 /* ProfileImageSettingViewController.swift in Sources */,
 				B1642DC52C1C1D5C003032F9 /* ReuseIdentifierProtocol.swift in Sources */,
 				B1642DA42C1AF5EB003032F9 /* Enums.swift in Sources */,
@@ -597,6 +597,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		B1642E0F2C208A0D003032F9 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.31.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -619,6 +627,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B1642DB42C1B0843003032F9 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		B1642E102C208A0D003032F9 /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1642E0F2C208A0D003032F9 /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
