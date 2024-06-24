@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B162AB982C29641200CA46ED /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162AB972C29641200CA46ED /* UIViewController+Extension.swift */; };
 		B1642D8A2C1AF24C003032F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642D892C1AF24C003032F9 /* AppDelegate.swift */; };
 		B1642D8C2C1AF24C003032F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642D8B2C1AF24C003032F9 /* SceneDelegate.swift */; };
 		B1642D8E2C1AF24C003032F9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642D8D2C1AF24C003032F9 /* OnboardingViewController.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B162AB972C29641200CA46ED /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		B1642D862C1AF24C003032F9 /* SeeTheGood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeeTheGood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1642D892C1AF24C003032F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1642D8B2C1AF24C003032F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			children = (
 				B1642DBD2C1BEA45003032F9 /* UITextField+Extension.swift */,
 				B1642E0D2C207CF0003032F9 /* UILabel+Extension.swift */,
+				B162AB972C29641200CA46ED /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				B1642DC52C1C1D5C003032F9 /* ReuseIdentifierProtocol.swift in Sources */,
 				B1642DA42C1AF5EB003032F9 /* Enums.swift in Sources */,
 				B1642DE02C1EED6A003032F9 /* SettingListTableViewCell.swift in Sources */,
+				B162AB982C29641200CA46ED /* UIViewController+Extension.swift in Sources */,
 				B1642DD42C1C9354003032F9 /* SearchResultViewController.swift in Sources */,
 				B1642D8C2C1AF24C003032F9 /* SceneDelegate.swift in Sources */,
 				B1642DC32C1BF20B003032F9 /* UserDefaultManager.swift in Sources */,
