@@ -121,7 +121,17 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             case 0...3:
                 print("추가구현 예정")
             case 4:
-                alertWithdraw()
+                showAlert(title: "탈퇴하기",
+                          message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴 하시겠습니까?",
+                          confirm: "확인") {
+                    self.user.nickName.removeAll()
+                    self.user.profileImageNum = 0
+                    self.user.didInitialSetting = false
+                    self.user.signUpDate.removeAll()
+                    self.user.basketItems = []
+                    self.user.mySearchList = []
+                    self.popTheOnboardingView()
+                }
             default:
                 fatalError("error")
             }
@@ -129,33 +139,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             fatalError("error")
         }
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    func alertWithdraw() {
-        let alert = UIAlertController(
-            title: "탈퇴하기",
-            message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴 하시겠습니까?",
-            preferredStyle: .alert)
-        
-        let confirm = UIAlertAction(
-            title: "확인",
-            style: .default) { action in
-                self.user.nickName.removeAll()
-                self.user.profileImageNum = 0
-                self.user.didInitialSetting = false
-                self.user.signUpDate.removeAll()
-                self.user.basketItems = []
-                self.user.mySearchList = []
-                self.popTheOnboardingView()
-            }
-        let cancel = UIAlertAction(
-            title: "취소",
-            style: .cancel)
-        
-        alert.addAction(cancel)
-        alert.addAction(confirm)
-        
-        present(alert, animated: true)
     }
     
     func popTheOnboardingView() {
