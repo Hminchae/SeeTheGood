@@ -168,9 +168,34 @@ final class SearchResultViewController: UIViewController {
     private func configureAsyncTask() {
         if let target = searchWord {
             navigationItem.title = target
-            Task {
-                await callRequest(query: target, sort: "\(SortType.sim)", page: page)
+            NetworkManager.shared.callRequest(query: target, sort: "\(SortType.sim)", page: page) { result in
+                DispatchQueue.main.async {
+                    self.handleNetworkResult(result)
+                }
             }
+        }
+    }
+    
+    private func handleNetworkResult(_ result: Result<Search, Error>) {
+        switch result {
+        case .success(let value):
+            self.responseList.items.append(contentsOf: value.items)
+            self.totalSearchResultLabel.text = "\(value.total)개의 검색 결과"
+            self.basketStateSyncOnDefault()
+            self.collectionView.reloadData()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                self.collectionView.stopSkeletonAnimation()
+                self.collectionView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+            }
+        case .failure:
+            self.view.makeToast("데이터를 받아오는데 실패했습니다.", duration: 5.0, position: .bottom, title: .none, image: .none) { didTap in
+                if didTap {
+                    print("completion from tap")
+                } else {
+                    print("completion without tap")
+                }
+            }
+            print("Failed to fetch data")
         }
     }
     
@@ -248,58 +273,14 @@ final class SearchResultViewController: UIViewController {
             // 네트워크 요청
             if let target = searchWord {
                 navigationItem.title = target
-                Task {
-                    await callRequest(query: target, sort: "\(selectedSortType)", page: page)
+                NetworkManager.shared.callRequest(query: target, sort: "\(selectedSortType)", page: page) { result in
+                    DispatchQueue.main.async {
+                        self.handleNetworkResult(result)
+                    }
                 }
             }
             collectionView.isSkeletonable = true
             collectionView.showAnimatedGradientSkeleton()
-        }
-    }
-}
-
-// 네트워크
-extension SearchResultViewController {
-    
-    func callRequest(query: String, sort: String, page: Int) async {
-        let url = "\(APIKey.url.rawValue)?query=\(query)"
-        let header: HTTPHeaders = [
-            "X-Naver-Client-Id": APIKey.clientID.rawValue,
-            "X-Naver-Client-Secret": APIKey.clientSecret.rawValue
-        ]
-        let para: Parameters = [
-            "query": query,
-            "display":30,
-            "sort": sort,
-            "page": page,
-        ]
-        
-        AF.request(url,
-                   method: .get,
-                   parameters: para,
-                   headers: header).responseDecodable(of: Search.self) { response in
-            switch response.result {
-            case .success(let value):
-                print("SUCCESS")
-                self.responseList.items.append(contentsOf: value.items)
-                self.totalSearchResultLabel.text = "\(value.total)개의 검색 결과"
-                self.basketStateSyncOnDefault()
-                self.collectionView.reloadData()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    self.collectionView.stopSkeletonAnimation()
-                    self.collectionView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
-                }
-            case .failure(let error):
-                self.view.makeToast("데이터를 받아오는데 실패했습니다.", duration: 5.0, position: .bottom, title: .none, image: .none) { didTap in
-                    if didTap {
-                        print("completion from tap")
-                    } else {
-                        print("completion without tap")
-                    }
-                }
-                print("Failed")
-                print(error)
-            }
         }
     }
 }
@@ -383,9 +364,11 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
         indexPaths.forEach { indexPath in
             if responseList.items.count - 2 == indexPath.row && !isEnd {
                 page += 1
-                Task {
-                    if let searchWord = searchWord {
-                        await callRequest(query: searchWord, sort: "\(SortType.sim)", page: page)
+                if let searchWord = searchWord {
+                    NetworkManager.shared.callRequest(query: searchWord, sort: "\(SortType.sim)", page: page) { result in
+                        DispatchQueue.main.async {
+                            self.handleNetworkResult(result)
+                        }
                     }
                 }
             }

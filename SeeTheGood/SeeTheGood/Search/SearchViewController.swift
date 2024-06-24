@@ -8,7 +8,6 @@
 import UIKit
 
 import SnapKit
-import Alamofire
 
 final class SearchViewController: UIViewController {
     

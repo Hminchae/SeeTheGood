@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B162AB982C29641200CA46ED /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162AB972C29641200CA46ED /* UIViewController+Extension.swift */; };
+		B162AB9B2C29858A00CA46ED /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162AB9A2C29858A00CA46ED /* NetworkManager.swift */; };
 		B1642D8A2C1AF24C003032F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642D892C1AF24C003032F9 /* AppDelegate.swift */; };
 		B1642D8C2C1AF24C003032F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642D8B2C1AF24C003032F9 /* SceneDelegate.swift */; };
 		B1642D8E2C1AF24C003032F9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642D8D2C1AF24C003032F9 /* OnboardingViewController.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		B162AB972C29641200CA46ED /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		B162AB9A2C29858A00CA46ED /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		B1642D862C1AF24C003032F9 /* SeeTheGood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeeTheGood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1642D892C1AF24C003032F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1642D8B2C1AF24C003032F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +91,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B162AB992C29856100CA46ED /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				B1642DC22C1BF20B003032F9 /* UserDefaultManager.swift */,
+				B162AB9A2C29858A00CA46ED /* NetworkManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		B1642D7D2C1AF24C003032F9 = {
 			isa = PBXGroup;
 			children = (
@@ -180,7 +191,7 @@
 		B1642DC12C1BF1E6003032F9 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				B1642DC22C1BF20B003032F9 /* UserDefaultManager.swift */,
+				B162AB992C29856100CA46ED /* Managers */,
 				B1642DA12C1AF554003032F9 /* Extension */,
 				B1642DA02C1AF52F003032F9 /* Protocol */,
 				B1642D9D2C1AF4B5003032F9 /* Enum */,
@@ -336,6 +347,7 @@
 				B162AB982C29641200CA46ED /* UIViewController+Extension.swift in Sources */,
 				B1642DD42C1C9354003032F9 /* SearchResultViewController.swift in Sources */,
 				B1642D8C2C1AF24C003032F9 /* SceneDelegate.swift in Sources */,
+				B162AB9B2C29858A00CA46ED /* NetworkManager.swift in Sources */,
 				B1642DC32C1BF20B003032F9 /* UserDefaultManager.swift in Sources */,
 				B1642E0E2C207CF0003032F9 /* UILabel+Extension.swift in Sources */,
 				B1642DC82C1C1E4A003032F9 /* ProfileImageCollectionViewCell.swift in Sources */,
