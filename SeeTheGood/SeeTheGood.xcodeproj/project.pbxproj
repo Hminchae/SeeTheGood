@@ -39,6 +39,7 @@
 		B1642DE02C1EED6A003032F9 /* SettingListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642DDF2C1EED6A003032F9 /* SettingListTableViewCell.swift */; };
 		B1642E0E2C207CF0003032F9 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642E0D2C207CF0003032F9 /* UILabel+Extension.swift */; };
 		B1642E112C208A0D003032F9 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = B1642E102C208A0D003032F9 /* SkeletonView */; };
+		B1CE5ED02C3196FC000F4AA1 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE5ECF2C3196FC000F4AA1 /* String+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		B1642DDD2C1EECE6003032F9 /* UserProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTableViewCell.swift; sourceTree = "<group>"; };
 		B1642DDF2C1EED6A003032F9 /* SettingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListTableViewCell.swift; sourceTree = "<group>"; };
 		B1642E0D2C207CF0003032F9 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		B1CE5ECF2C3196FC000F4AA1 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 				B1642DBD2C1BEA45003032F9 /* UITextField+Extension.swift */,
 				B1642E0D2C207CF0003032F9 /* UILabel+Extension.swift */,
 				B162AB972C29641200CA46ED /* UIViewController+Extension.swift */,
+				B1CE5ECF2C3196FC000F4AA1 /* String+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				B162AB9B2C29858A00CA46ED /* NetworkManager.swift in Sources */,
 				B1642DC32C1BF20B003032F9 /* UserDefaultManager.swift in Sources */,
 				B1642E0E2C207CF0003032F9 /* UILabel+Extension.swift in Sources */,
+				B1CE5ED02C3196FC000F4AA1 /* String+Extension.swift in Sources */,
 				B1642DC82C1C1E4A003032F9 /* ProfileImageCollectionViewCell.swift in Sources */,
 				B1642DA82C1AF9B4003032F9 /* APIKey.swift in Sources */,
 				B1642DCF2C1C728F003032F9 /* SearchTableViewCell.swift in Sources */,

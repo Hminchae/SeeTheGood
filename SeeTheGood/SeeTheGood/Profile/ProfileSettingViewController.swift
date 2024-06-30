@@ -253,37 +253,23 @@ final class ProfileSettingViewController: UIViewController {
     @objc private func textFieldDidChange(_ textField: UITextField) {
         guard let nickName = nickNameTextField.text else { return }
         
-        if nickName.count < 2 || nickName.count >= 10 {
-            commentLabel.text = "2글자 이상 10글자 미만으로 설정해주세요"
-            return
+        do {
+            try nickName.validateNickname()
+            commentLabel.text = "사용할 수 있는 닉네임이에요"
+        } catch let error as ValidationError {
+            commentLabel.text = error.message
+        } catch {
+            commentLabel.text = "알 수 없는 오류가 발생했습니다."
         }
-        
-        let unwantedChars = CharacterSet(charactersIn: "@#$%")
-        let unwantedIntegers = CharacterSet.decimalDigits
-        
-        if nickName.rangeOfCharacter(from: unwantedChars) != nil {
-            commentLabel.text = "닉네임에 @,#,$,% 는 포함할 수 없어요"
-            return
-        }
-        
-        if nickName.rangeOfCharacter(from: unwantedIntegers) != nil {
-            commentLabel.text = "닉네임에 숫자는 포함할 수 없어요"
-            return
-        }
-        
-        commentLabel.text = "사용할 수 있는 닉네임이에요"
     }
     
     private func isNickNameChecked(_ text: String) -> Bool {
-        let textCount = text.count
-        
-        if textCount >= 2 && textCount < 10 {
-            let unwantedChars = CharacterSet(charactersIn: "@#$%0123456789")
-            if text.rangeOfCharacter(from: unwantedChars) == nil {
-                return true
-            }
+        do {
+            try text.validateNickname()
+            return true
+        } catch {
+            return false
         }
-        return false
     }
     
     private func formatTodayDate() -> String {

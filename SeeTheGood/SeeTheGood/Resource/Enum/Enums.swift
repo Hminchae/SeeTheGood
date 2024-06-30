@@ -67,3 +67,21 @@ enum NetworkError: Error {
     case invalidResponse
     case invalidData
 }
+
+// 닉네임 유효성 검사
+enum ValidationError: Error {
+    case invalidLength
+    case containsUnwantedCharacters
+    case containsDigits
+    
+    var message: String {
+        switch self {
+        case .invalidLength:
+            return "2글자 이상 10글자 미만으로 설정해주세요"
+        case .containsUnwantedCharacters:
+            return "닉네임에 @,#,$,% 는 포함할 수 없어요"
+        case .containsDigits:
+            return "닉네임에 숫자는 포함할 수 없어요"
+        }
+    }
+}
