@@ -7,7 +7,6 @@
 
 import UIKit
 
-import Alamofire
 import Kingfisher
 import SkeletonView
 import SnapKit
@@ -168,34 +167,48 @@ final class SearchResultViewController: UIViewController {
     private func configureAsyncTask() {
         if let target = searchWord {
             navigationItem.title = target
-            NetworkManager.shared.callRequest(query: target, sort: "\(SortType.sim)", page: page) { result in
+            NetworkManager.shared.callRequest(query: target, sort: "\(SortType.sim)", page: page) { result, error  in
                 DispatchQueue.main.async {
-                    self.handleNetworkResult(result)
+                    self.handleNetworkResult(result: result, error: error)
                 }
             }
         }
     }
     
-    private func handleNetworkResult(_ result: Result<Search, Error>) {
-        switch result {
-        case .success(let value):
+    private func handleNetworkResult(result: Search?, error: NetworkError?) {
+        if let value = result {
             self.responseList.items.append(contentsOf: value.items)
             self.totalSearchResultLabel.text = "\(value.total)개의 검색 결과"
             self.basketStateSyncOnDefault()
             self.collectionView.reloadData()
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 self.collectionView.stopSkeletonAnimation()
                 self.collectionView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
             }
-        case .failure:
-            self.view.makeToast("데이터를 받아오는데 실패했습니다.", duration: 5.0, position: .bottom, title: .none, image: .none) { didTap in
+        } else if let error = error {
+            var errorMessage = ""
+            
+            switch error {
+            case .failedRequest:
+                errorMessage = "요청에 실패"
+            case .noData:
+                errorMessage = "데이터가 없음"
+            case .invalidResponse:
+                errorMessage = "잘못된 응답"
+            case .invalidData:
+                errorMessage = "잘못된 데이터"
+            }
+            
+            self.view.makeToast(errorMessage, duration: 5.0, position: .bottom, title: nil, image: nil) { didTap in
                 if didTap {
                     print("completion from tap")
                 } else {
                     print("completion without tap")
                 }
             }
-            print("Failed to fetch data")
+            
+            print("Failed to fetch data: \(error)")
         }
     }
     
@@ -273,9 +286,10 @@ final class SearchResultViewController: UIViewController {
             // 네트워크 요청
             if let target = searchWord {
                 navigationItem.title = target
-                NetworkManager.shared.callRequest(query: target, sort: "\(selectedSortType)", page: page) { result in
+                
+                NetworkManager.shared.callRequest(query: target, sort: "\(selectedSortType)", page: page) { result, error in
                     DispatchQueue.main.async {
-                        self.handleNetworkResult(result)
+                        self.handleNetworkResult(result: result, error: error)
                     }
                 }
             }
@@ -365,16 +379,16 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
             if responseList.items.count - 2 == indexPath.row && !isEnd {
                 page += 1
                 if let searchWord = searchWord {
-                    NetworkManager.shared.callRequest(query: searchWord, sort: "\(SortType.sim)", page: page) { result in
+                    NetworkManager.shared.callRequest(query: searchWord, sort: "\(SortType.sim)", page: page) { result, error  in
                         DispatchQueue.main.async {
-                            self.handleNetworkResult(result)
+                            self.handleNetworkResult(result: result, error: error)
                         }
                     }
                 }
             }
         }
+        
     }
-    
     // 취소기능
     func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
         indexPaths.forEach { indexPath in

@@ -7,34 +7,73 @@
 
 import Foundation
 
-import Alamofire
-
 class NetworkManager {
+    
     static let shared = NetworkManager()
     
-    private init() { }
+    private init() {}
     
-    func callRequest(query: String, sort: String, page: Int, completionHandler: @escaping (Result<Search, Error>) -> Void) {
-        let url = "\(APIKey.url.rawValue)?query=\(query)"
-        let header: HTTPHeaders = [
-            "X-Naver-Client-Id": APIKey.clientID.rawValue,
-            "X-Naver-Client-Secret": APIKey.clientSecret.rawValue
-        ]
-        let para: Parameters = [
-            "query": query,
-            "display":30,
-            "sort": sort,
-            "page": page,
+    func callRequest(query: String, sort: String, page: Int, completionHandler: @escaping (Search?, NetworkError?) -> Void) {
+        var component = URLComponents()
+        
+        component.scheme = "https"
+        component.host = "openapi.naver.com"
+        component.path = "/v1/search/shop.json"
+        
+        component.queryItems = [
+            URLQueryItem(name: "query", value: query),
+            URLQueryItem(name: "display", value: "30"),
+            URLQueryItem(name: "sort", value: sort),
+            URLQueryItem(name: "start", value: String(page))
         ]
         
-        AF.request(url, method: .get, parameters: para, headers: header)
-            .responseDecodable(of: Search.self) { response in
-                switch response.result {
-                case .success(let value):
-                    completionHandler(.success(value))
-                case .failure(let error):
-                    completionHandler(.failure(error))
+        guard let url = component.url else {
+            completionHandler(nil, .invalidResponse)
+            return
+        }
+        
+        var request = URLRequest(url: url, timeoutInterval: 5)
+        
+        request.addValue(APIKey.clientID.rawValue, forHTTPHeaderField: "X-Naver-Client-Id")
+        request.addValue(APIKey.clientSecret.rawValue, forHTTPHeaderField: "X-Naver-Client-Secret")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            DispatchQueue.main.async {
+                guard error == nil else {
+                    print("Failed Request: \(error!.localizedDescription)")
+                    completionHandler(nil, .failedRequest)
+                    return
+                }
+                
+                guard let data = data else {
+                    print("No Data Returned")
+                    completionHandler(nil, .noData)
+                    return
+                }
+                
+                guard let response = response as? HTTPURLResponse else {
+                    completionHandler(nil, .invalidResponse)
+                    print("Unable Response")
+                    return
+                }
+                
+                guard response.statusCode == 200 else {
+                    print("Failed Response with status code: \(response.statusCode)")
+                    completionHandler(nil, .failedRequest)
+                    return
+                }
+                
+                do {
+                    let result = try JSONDecoder().decode(Search.self, from: data)
+                    completionHandler(result, nil)
+                    print(result)
+                    print("Success")
+                } catch {
+                    print("Error")
+                    print(error)
+                    completionHandler(nil, .invalidData)
                 }
             }
+        }.resume()
     }
 }

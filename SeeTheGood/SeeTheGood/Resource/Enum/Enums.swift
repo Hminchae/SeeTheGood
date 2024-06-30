@@ -59,3 +59,11 @@ enum SettingList: String, CaseIterable {
     case notiSetting = "알림 설정"
     case withdraw = "탈퇴하기"
 }
+
+// 네트워크 에러
+enum NetworkError: Error {
+    case failedRequest
+    case noData
+    case invalidResponse
+    case invalidData
+}
