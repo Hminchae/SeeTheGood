@@ -40,6 +40,9 @@
 		B1642E0E2C207CF0003032F9 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1642E0D2C207CF0003032F9 /* UILabel+Extension.swift */; };
 		B1642E112C208A0D003032F9 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = B1642E102C208A0D003032F9 /* SkeletonView */; };
 		B1CE5ED02C3196FC000F4AA1 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE5ECF2C3196FC000F4AA1 /* String+Extension.swift */; };
+		B1CE5FEB2C3B5FCB000F4AA1 /* BasketRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE5FEA2C3B5FCB000F4AA1 /* BasketRepository.swift */; };
+		B1CE5FED2C3B6013000F4AA1 /* BasketTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE5FEC2C3B6013000F4AA1 /* BasketTable.swift */; };
+		B1CE5FF02C3B617C000F4AA1 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B1CE5FEF2C3B617C000F4AA1 /* RealmSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +77,8 @@
 		B1642DDF2C1EED6A003032F9 /* SettingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListTableViewCell.swift; sourceTree = "<group>"; };
 		B1642E0D2C207CF0003032F9 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		B1CE5ECF2C3196FC000F4AA1 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		B1CE5FEA2C3B5FCB000F4AA1 /* BasketRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketRepository.swift; sourceTree = "<group>"; };
+		B1CE5FEC2C3B6013000F4AA1 /* BasketTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketTable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +89,7 @@
 				B1642DB32C1B0836003032F9 /* Kingfisher in Frameworks */,
 				B1642DB62C1B0843003032F9 /* SnapKit in Frameworks */,
 				B1642DAD2C1B081E003032F9 /* Toast in Frameworks */,
+				B1CE5FF02C3B617C000F4AA1 /* RealmSwift in Frameworks */,
 				B1642E112C208A0D003032F9 /* SkeletonView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,6 +102,7 @@
 			children = (
 				B1642DC22C1BF20B003032F9 /* UserDefaultManager.swift */,
 				B162AB9A2C29858A00CA46ED /* NetworkManager.swift */,
+				B1CE5FEA2C3B5FCB000F4AA1 /* BasketRepository.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -185,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				B1642DD12C1C8F37003032F9 /* Search.swift */,
+				B1CE5FEC2C3B6013000F4AA1 /* BasketTable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -269,6 +277,7 @@
 				B1642DB22C1B0836003032F9 /* Kingfisher */,
 				B1642DB52C1B0843003032F9 /* SnapKit */,
 				B1642E102C208A0D003032F9 /* SkeletonView */,
+				B1CE5FEF2C3B617C000F4AA1 /* RealmSwift */,
 			);
 			productName = SeeTheGood;
 			productReference = B1642D862C1AF24C003032F9 /* SeeTheGood.app */;
@@ -303,6 +312,7 @@
 				B1642DB12C1B0836003032F9 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				B1642DB42C1B0843003032F9 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				B1642E0F2C208A0D003032F9 /* XCRemoteSwiftPackageReference "SkeletonView" */,
+				B1CE5FEE2C3B617C000F4AA1 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = B1642D872C1AF24C003032F9 /* Products */;
 			projectDirPath = "";
@@ -333,6 +343,8 @@
 				B1642DBE2C1BEA45003032F9 /* UITextField+Extension.swift in Sources */,
 				B1642D8E2C1AF24C003032F9 /* OnboardingViewController.swift in Sources */,
 				B1642D8A2C1AF24C003032F9 /* AppDelegate.swift in Sources */,
+				B1CE5FED2C3B6013000F4AA1 /* BasketTable.swift in Sources */,
+				B1CE5FEB2C3B5FCB000F4AA1 /* BasketRepository.swift in Sources */,
 				B1642DCB2C1C5740003032F9 /* MainTabBarViewController.swift in Sources */,
 				B1642DD22C1C8F37003032F9 /* Search.swift in Sources */,
 				B1642DBA2C1B1167003032F9 /* OrangeButton.swift in Sources */,
@@ -613,6 +625,14 @@
 				minimumVersion = 1.31.0;
 			};
 		};
+		B1CE5FEE2C3B617C000F4AA1 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -635,6 +655,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B1642E0F2C208A0D003032F9 /* XCRemoteSwiftPackageReference "SkeletonView" */;
 			productName = SkeletonView;
+		};
+		B1CE5FEF2C3B617C000F4AA1 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1CE5FEE2C3B617C000F4AA1 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
