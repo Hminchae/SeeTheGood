@@ -12,6 +12,7 @@ import SnapKit
 
 final class SearchDetailViewController: UIViewController {
     
+    private let repository = BasketRepository()
     private var user = UserDefaultManager.shared
     
     var link: String?
@@ -56,7 +57,17 @@ final class SearchDetailViewController: UIViewController {
             target: self,
             action: #selector(basketButtonClicked))
         
-        navigationItem.rightBarButtonItem = basket
+        let infoImage = UIImage(systemName: "info")?.withRenderingMode(.alwaysTemplate)
+        
+        let info = UIBarButtonItem(
+            image: infoImage,
+            style: .plain,
+            target: self,
+            action: #selector(infoButtonClicked))
+        
+        info.tintColor = .black
+        
+        navigationItem.rightBarButtonItems = [basket, info]
     }
     
     @objc func basketButtonClicked(_ sender: UIButton) { // true 면 디폴트에 넣고, false 면 제거한다.
@@ -76,6 +87,25 @@ final class SearchDetailViewController: UIViewController {
         }
     }
     
+    @objc func infoButtonClicked() {
+        var alertContents = ""
+        if let productId {
+            alertContents = repository.fetchCategory(productNum: productId)?.categoryTitle ?? "카테고리 없음"
+        }
+        let alert = UIAlertController(
+            title: "이 상품은 \(alertContents)에 담겨있습니다.",
+            message: nil,
+            preferredStyle: .alert)
+        
+        let open = UIAlertAction(
+            title: "열기",
+            style: .default)
+
+        alert.addAction(open)
+        
+        present(alert, animated: true)
+    }
+  
     private func configureLayout() {
         topLineView.snp.makeConstraints { make in
             make.horizontalEdges.top.equalTo(view.safeAreaLayoutGuide)

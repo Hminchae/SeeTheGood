@@ -39,7 +39,7 @@ final class BasketListCollectionViewCell: BaseCollectionViewCell {
         
         categoryTitleLable.snp.makeConstraints { make in
             make.top.equalTo(lastItemimageView.snp.bottom).offset(5)
-            make.horizontalEdges.equalTo(contentView.snp.horizontalEdges)
+            make.horizontalEdges.equalTo(contentView.snp.horizontalEdges).inset(10)
         }
     }
     

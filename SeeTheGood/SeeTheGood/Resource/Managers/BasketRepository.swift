@@ -25,6 +25,17 @@ final class BasketRepository {
         
         return Array(value)
     }
+
+    // productNum으로 특정 아이템의 카테고리 가져오기
+    func fetchCategory(productNum: String) -> BasketCategory? {
+
+        if let basketTable = realm.objects(BasketTable.self).filter("productNum == %@", productNum).first {
+
+            return basketTable.itemsCategory.first
+        }
+        
+        return nil
+    }
     
     // 데이터 추가
     func addBasketDetailToCategory(data: BasketTable) {

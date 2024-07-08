@@ -25,6 +25,8 @@ class BasketTable: Object {
     @Persisted var price: String
     @Persisted var regDate: Date
     
+    @Persisted(originProperty: "productList") var itemsCategory: LinkingObjects<BasketCategory>
+    
     convenience init(title: String,
                      productNum: String,
                      link: String,
