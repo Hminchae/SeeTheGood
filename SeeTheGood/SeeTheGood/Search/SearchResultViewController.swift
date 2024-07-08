@@ -312,7 +312,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         
         cell.mainImageView.kf.setImage(with: imageUrl)
         cell.mallNameLabel.text = data.mallName
-        cell.productTitle.text = cleanText(data.title)
+        cell.productTitle.text = data.title.cleanHTMLTags()
         
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -340,18 +340,11 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         let data = responseList.items[indexPath.row]
         
         vc.link = data.link
-        vc.productTitle = cleanText(data.title)
+        vc.productTitle = data.title.cleanHTMLTags()
         vc.isBasketClicked = basketDictionary[data.productId]
         vc.productId = data.productId
         
         navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    private func cleanText(_ text: String) -> String {
-        let regex = try! NSRegularExpression(pattern: "<[^>]+>", options: [])
-        let cleanText = regex.stringByReplacingMatches(in: text, options: [], range: NSRange(location: 0, length: text.utf16.count), withTemplate: "")
-        
-        return cleanText
     }
     
     private func formatStrToMoney(_ price: String) -> String {

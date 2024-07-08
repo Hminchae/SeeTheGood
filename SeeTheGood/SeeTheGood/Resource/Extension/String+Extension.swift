@@ -37,4 +37,12 @@ extension String {
         try containsUnwantedCharacters()
         try containsDigits()
     }
+    
+    // HTML 태그를 제거
+    func cleanHTMLTags() -> String {
+        let regex = try! NSRegularExpression(pattern: "<[^>]+>", options: [])
+        let cleanText = regex.stringByReplacingMatches(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count), withTemplate: "")
+        
+        return cleanText
+    }
 }
