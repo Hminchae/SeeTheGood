@@ -48,6 +48,7 @@
 		B1CE5FFB2C3BE902000F4AA1 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE5FFA2C3BE902000F4AA1 /* BaseTableViewCell.swift */; };
 		B1CE5FFD2C3BE91A000F4AA1 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE5FFC2C3BE91A000F4AA1 /* BaseCollectionViewCell.swift */; };
 		B1CE60002C3BE998000F4AA1 /* BasketListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE5FFF2C3BE998000F4AA1 /* BasketListCollectionViewCell.swift */; };
+		B1CE60022C3C01F9000F4AA1 /* BasketListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE60012C3C01F9000F4AA1 /* BasketListDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +90,7 @@
 		B1CE5FFA2C3BE902000F4AA1 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		B1CE5FFC2C3BE91A000F4AA1 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1CE5FFF2C3BE998000F4AA1 /* BasketListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketListCollectionViewCell.swift; sourceTree = "<group>"; };
+		B1CE60012C3C01F9000F4AA1 /* BasketListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketListDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +275,7 @@
 			children = (
 				B1CE5FFE2C3BE984000F4AA1 /* Cell */,
 				B1CE5FF42C3BE8A3000F4AA1 /* BasketListViewController.swift */,
+				B1CE60012C3C01F9000F4AA1 /* BasketListDetailViewController.swift */,
 			);
 			path = Basket;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 				B1CE5FFD2C3BE91A000F4AA1 /* BaseCollectionViewCell.swift in Sources */,
 				B1642DC02C1BF123003032F9 /* SearchViewController.swift in Sources */,
 				B1642DD92C1CD1E5003032F9 /* SearchResultCollectionViewCell.swift in Sources */,
+				B1CE60022C3C01F9000F4AA1 /* BasketListDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

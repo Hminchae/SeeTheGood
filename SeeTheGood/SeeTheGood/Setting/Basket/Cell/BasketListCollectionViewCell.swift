@@ -9,7 +9,7 @@ import UIKit
 
 final class BasketListCollectionViewCell: BaseCollectionViewCell {
     
-    private var lastItemimageView = {
+    var lastItemimageView = {
         let view = UIImageView()
         view.backgroundColor = .systemGray
         view.layer.cornerRadius = 8

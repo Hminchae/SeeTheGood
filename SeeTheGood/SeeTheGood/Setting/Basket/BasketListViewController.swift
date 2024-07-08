@@ -7,9 +7,12 @@
 
 import UIKit
 
+import Kingfisher
+
 final class BasketListViewController: BaseViewController {
     
     private let repository = BasketRepository()
+    
     var list: [BasketCategory] = []
     
     lazy private var collectionView: UICollectionView = {
@@ -71,10 +74,27 @@ extension BasketListViewController: UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BasketListCollectionViewCell.identifier, for: indexPath)
         guard let cell = cell as? BasketListCollectionViewCell else { return UICollectionViewCell() }
+        
         let data = list[indexPath.row]
         
         cell.categoryTitleLable.text = data.categoryTitle
         
+        if let url = data.productList.first?.imageUrl {
+            let imageUrl = URL(string: url)
+            cell.lastItemimageView.kf.setImage(with: imageUrl)
+        }
+       
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let data = Array(list[indexPath.row].productList)
+        
+        let vc = BasketListDetailViewController()
+        vc.list = data
+        
+        vc.viewTitle = list[indexPath.row].categoryTitle
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
