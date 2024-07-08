@@ -118,7 +118,10 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             navigationController?.pushViewController(vc, animated: true)
         case 1:
             switch indexPath.row {
-            case 0...3:
+            case 0:
+                let vc = BasketListViewController()
+                navigationController?.pushViewController(vc, animated: true)
+            case 1...3:
                 print("추가구현 예정")
             case 4:
                 showAlert(title: "탈퇴하기",

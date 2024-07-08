@@ -26,7 +26,7 @@ class MainTabBarViewController: UITabBarController {
         
         let appearance = UITabBarAppearance()
         
-        appearance.shadowColor = .clear
+        appearance.shadowColor = .gray
         appearance.backgroundColor = .white
         
         tabBar.standardAppearance = appearance
@@ -35,7 +35,6 @@ class MainTabBarViewController: UITabBarController {
                 // set tabbar opacity
                 tabBar.scrollEdgeAppearance = tabBar.standardAppearance
         }
-
         setViewControllers([search, setting], animated: true)
     }
 }
