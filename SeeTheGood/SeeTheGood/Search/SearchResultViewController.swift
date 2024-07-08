@@ -14,6 +14,7 @@ import Toast
 
 final class SearchResultViewController: UIViewController {
     
+    private let repository = BasketRepository()
     private var user = UserDefaultManager.shared
     
     var searchWord: String?
@@ -366,9 +367,20 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     
     @objc private func basketButtonClicked(_ sender: UIButton) {
         let index = sender.tag
-        let targetId = responseList.items[index].productId
+        let target = responseList.items[index]
         
-        basketDictionary[targetId] = !(basketDictionary[targetId] ?? false)
+        basketDictionary[target.productId] = !(basketDictionary[target.productId] ?? false)
+        
+        let data = BasketTable(title: target.title,
+                               productNum: target.productId,
+                               link: target.link,
+                               imageUrl: target.image,
+                               mallName: target.mallName,
+                               price: target.lprice,
+                               regDate: Date())
+        
+        repository.addBasketDetailToCategory(data: data)
+        
         collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
     }
 }

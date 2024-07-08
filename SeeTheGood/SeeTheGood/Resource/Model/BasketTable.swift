@@ -18,18 +18,20 @@ class BasketCategory: Object {
 class BasketTable: Object {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted(indexed: true) var title: String
-    @Persisted var productNum: Int
+    @Persisted var productNum: String
     @Persisted var link: String
     @Persisted var imageUrl: String
     @Persisted var mallName: String
     @Persisted var price: String
+    @Persisted var regDate: Date
     
     convenience init(title: String,
-                     productNum: Int,
+                     productNum: String,
                      link: String,
                      imageUrl: String,
                      mallName: String,
-                     price: String
+                     price: String,
+                     regDate: Date
     ) {
         self.init()
         self.title = title
@@ -38,6 +40,7 @@ class BasketTable: Object {
         self.imageUrl = imageUrl
         self.mallName = mallName
         self.price = price
+        self.regDate = regDate
     }
 }
 

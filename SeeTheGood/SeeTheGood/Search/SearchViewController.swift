@@ -11,6 +11,7 @@ import SnapKit
 
 final class SearchViewController: UIViewController {
     
+    private let repository = BasketRepository()
     private let user = UserDefaultManager.shared
     
     lazy private var list: [String] = user.mySearchList
@@ -90,6 +91,8 @@ final class SearchViewController: UIViewController {
         tableView.rowHeight = 40
         
         searchBar.delegate = self
+        
+        repository.priteFileLocation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
