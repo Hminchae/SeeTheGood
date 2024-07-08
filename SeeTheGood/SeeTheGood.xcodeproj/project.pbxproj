@@ -43,6 +43,10 @@
 		B1CE5FEB2C3B5FCB000F4AA1 /* BasketRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE5FEA2C3B5FCB000F4AA1 /* BasketRepository.swift */; };
 		B1CE5FED2C3B6013000F4AA1 /* BasketTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE5FEC2C3B6013000F4AA1 /* BasketTable.swift */; };
 		B1CE5FF02C3B617C000F4AA1 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B1CE5FEF2C3B617C000F4AA1 /* RealmSwift */; };
+		B1CE5FF52C3BE8A4000F4AA1 /* BasketListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE5FF42C3BE8A3000F4AA1 /* BasketListViewController.swift */; };
+		B1CE5FF92C3BE8D9000F4AA1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE5FF82C3BE8D9000F4AA1 /* BaseViewController.swift */; };
+		B1CE5FFB2C3BE902000F4AA1 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE5FFA2C3BE902000F4AA1 /* BaseTableViewCell.swift */; };
+		B1CE5FFD2C3BE91A000F4AA1 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE5FFC2C3BE91A000F4AA1 /* BaseCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +83,10 @@
 		B1CE5ECF2C3196FC000F4AA1 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		B1CE5FEA2C3B5FCB000F4AA1 /* BasketRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketRepository.swift; sourceTree = "<group>"; };
 		B1CE5FEC2C3B6013000F4AA1 /* BasketTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketTable.swift; sourceTree = "<group>"; };
+		B1CE5FF42C3BE8A3000F4AA1 /* BasketListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketListViewController.swift; sourceTree = "<group>"; };
+		B1CE5FF82C3BE8D9000F4AA1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		B1CE5FFA2C3BE902000F4AA1 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		B1CE5FFC2C3BE91A000F4AA1 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +208,7 @@
 		B1642DC12C1BF1E6003032F9 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				B1CE5FF62C3BE8B6000F4AA1 /* Base */,
 				B162AB992C29856100CA46ED /* Managers */,
 				B1642DA12C1AF554003032F9 /* Extension */,
 				B1642DA02C1AF52F003032F9 /* Protocol */,
@@ -241,6 +250,7 @@
 		B1642DD52C1C9361003032F9 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				B1CE5FF32C3BE888000F4AA1 /* Basket */,
 				B1642DDC2C1EEC9B003032F9 /* Cell */,
 				B1642DCC2C1C584A003032F9 /* SettingViewController.swift */,
 			);
@@ -254,6 +264,24 @@
 				B1642DDF2C1EED6A003032F9 /* SettingListTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		B1CE5FF32C3BE888000F4AA1 /* Basket */ = {
+			isa = PBXGroup;
+			children = (
+				B1CE5FF42C3BE8A3000F4AA1 /* BasketListViewController.swift */,
+			);
+			path = Basket;
+			sourceTree = "<group>";
+		};
+		B1CE5FF62C3BE8B6000F4AA1 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				B1CE5FF82C3BE8D9000F4AA1 /* BaseViewController.swift */,
+				B1CE5FFA2C3BE902000F4AA1 /* BaseTableViewCell.swift */,
+				B1CE5FFC2C3BE91A000F4AA1 /* BaseCollectionViewCell.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,16 +372,19 @@
 				B1642D8E2C1AF24C003032F9 /* OnboardingViewController.swift in Sources */,
 				B1642D8A2C1AF24C003032F9 /* AppDelegate.swift in Sources */,
 				B1CE5FED2C3B6013000F4AA1 /* BasketTable.swift in Sources */,
+				B1CE5FF92C3BE8D9000F4AA1 /* BaseViewController.swift in Sources */,
 				B1CE5FEB2C3B5FCB000F4AA1 /* BasketRepository.swift in Sources */,
 				B1642DCB2C1C5740003032F9 /* MainTabBarViewController.swift in Sources */,
 				B1642DD22C1C8F37003032F9 /* Search.swift in Sources */,
 				B1642DBA2C1B1167003032F9 /* OrangeButton.swift in Sources */,
+				B1CE5FF52C3BE8A4000F4AA1 /* BasketListViewController.swift in Sources */,
 				B1642DCD2C1C584A003032F9 /* SettingViewController.swift in Sources */,
 				B1642DDB2C1EAB80003032F9 /* SearchDetailViewController.swift in Sources */,
 				B1642DDE2C1EECE6003032F9 /* UserProfileTableViewCell.swift in Sources */,
 				B1642DBC2C1BDF9D003032F9 /* ProfileImageSettingViewController.swift in Sources */,
 				B1642DC52C1C1D5C003032F9 /* ReuseIdentifierProtocol.swift in Sources */,
 				B1642DA42C1AF5EB003032F9 /* Enums.swift in Sources */,
+				B1CE5FFB2C3BE902000F4AA1 /* BaseTableViewCell.swift in Sources */,
 				B1642DE02C1EED6A003032F9 /* SettingListTableViewCell.swift in Sources */,
 				B162AB982C29641200CA46ED /* UIViewController+Extension.swift in Sources */,
 				B1642DD42C1C9354003032F9 /* SearchResultViewController.swift in Sources */,
@@ -367,6 +398,7 @@
 				B1642DCF2C1C728F003032F9 /* SearchTableViewCell.swift in Sources */,
 				B1642DB82C1B0F76003032F9 /* ProfileSettingViewController.swift in Sources */,
 				B1642DD72C1CA54D003032F9 /* LineView.swift in Sources */,
+				B1CE5FFD2C3BE91A000F4AA1 /* BaseCollectionViewCell.swift in Sources */,
 				B1642DC02C1BF123003032F9 /* SearchViewController.swift in Sources */,
 				B1642DD92C1CD1E5003032F9 /* SearchResultCollectionViewCell.swift in Sources */,
 			);
