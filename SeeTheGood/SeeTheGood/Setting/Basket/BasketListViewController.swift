@@ -35,6 +35,7 @@ final class BasketListViewController: BaseViewController {
     }
     override func configureView() {
         navigationItem.title = "나의 장바구니 목록"
+        navigationController?.navigationBar.makeLineOnNavBar()
         configureList()
     }
     

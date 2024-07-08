@@ -98,7 +98,7 @@ final class SearchDetailViewController: UIViewController {
             preferredStyle: .alert)
         
         let open = UIAlertAction(
-            title: "열기",
+            title: "확인이용",
             style: .default)
 
         alert.addAction(open)

@@ -49,6 +49,7 @@
 		B1CE5FFD2C3BE91A000F4AA1 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE5FFC2C3BE91A000F4AA1 /* BaseCollectionViewCell.swift */; };
 		B1CE60002C3BE998000F4AA1 /* BasketListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE5FFF2C3BE998000F4AA1 /* BasketListCollectionViewCell.swift */; };
 		B1CE60022C3C01F9000F4AA1 /* BasketListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE60012C3C01F9000F4AA1 /* BasketListDetailViewController.swift */; };
+		B1CE60042C3C251B000F4AA1 /* UINavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE60032C3C251B000F4AA1 /* UINavigationBar+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +92,7 @@
 		B1CE5FFC2C3BE91A000F4AA1 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1CE5FFF2C3BE998000F4AA1 /* BasketListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketListCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1CE60012C3C01F9000F4AA1 /* BasketListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketListDetailViewController.swift; sourceTree = "<group>"; };
+		B1CE60032C3C251B000F4AA1 /* UINavigationBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +198,7 @@
 				B1642E0D2C207CF0003032F9 /* UILabel+Extension.swift */,
 				B162AB972C29641200CA46ED /* UIViewController+Extension.swift */,
 				B1CE5ECF2C3196FC000F4AA1 /* String+Extension.swift */,
+				B1CE60032C3C251B000F4AA1 /* UINavigationBar+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				B1642D8A2C1AF24C003032F9 /* AppDelegate.swift in Sources */,
 				B1CE5FED2C3B6013000F4AA1 /* BasketTable.swift in Sources */,
 				B1CE5FF92C3BE8D9000F4AA1 /* BaseViewController.swift in Sources */,
+				B1CE60042C3C251B000F4AA1 /* UINavigationBar+Extension.swift in Sources */,
 				B1CE5FEB2C3B5FCB000F4AA1 /* BasketRepository.swift in Sources */,
 				B1642DCB2C1C5740003032F9 /* MainTabBarViewController.swift in Sources */,
 				B1642DD22C1C8F37003032F9 /* Search.swift in Sources */,
