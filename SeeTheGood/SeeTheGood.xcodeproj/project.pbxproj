@@ -50,6 +50,7 @@
 		B1CE60002C3BE998000F4AA1 /* BasketListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE5FFF2C3BE998000F4AA1 /* BasketListCollectionViewCell.swift */; };
 		B1CE60022C3C01F9000F4AA1 /* BasketListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE60012C3C01F9000F4AA1 /* BasketListDetailViewController.swift */; };
 		B1CE60042C3C251B000F4AA1 /* UINavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE60032C3C251B000F4AA1 /* UINavigationBar+Extension.swift */; };
+		B1CE601A2C3DF2D8000F4AA1 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE60192C3DF2D8000F4AA1 /* Observable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,7 @@
 		B1CE5FFF2C3BE998000F4AA1 /* BasketListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketListCollectionViewCell.swift; sourceTree = "<group>"; };
 		B1CE60012C3C01F9000F4AA1 /* BasketListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketListDetailViewController.swift; sourceTree = "<group>"; };
 		B1CE60032C3C251B000F4AA1 /* UINavigationBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Extension.swift"; sourceTree = "<group>"; };
+		B1CE60192C3DF2D8000F4AA1 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +210,7 @@
 			children = (
 				B1642DD12C1C8F37003032F9 /* Search.swift */,
 				B1CE5FEC2C3B6013000F4AA1 /* BasketTable.swift */,
+				B1CE60192C3DF2D8000F4AA1 /* Observable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				B1CE60002C3BE998000F4AA1 /* BasketListCollectionViewCell.swift in Sources */,
 				B1642DA82C1AF9B4003032F9 /* APIKey.swift in Sources */,
 				B1642DCF2C1C728F003032F9 /* SearchTableViewCell.swift in Sources */,
+				B1CE601A2C3DF2D8000F4AA1 /* Observable.swift in Sources */,
 				B1642DB82C1B0F76003032F9 /* ProfileSettingViewController.swift in Sources */,
 				B1642DD72C1CA54D003032F9 /* LineView.swift in Sources */,
 				B1CE5FFD2C3BE91A000F4AA1 /* BaseCollectionViewCell.swift in Sources */,
