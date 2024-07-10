@@ -51,6 +51,7 @@
 		B1CE60022C3C01F9000F4AA1 /* BasketListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE60012C3C01F9000F4AA1 /* BasketListDetailViewController.swift */; };
 		B1CE60042C3C251B000F4AA1 /* UINavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE60032C3C251B000F4AA1 /* UINavigationBar+Extension.swift */; };
 		B1CE601A2C3DF2D8000F4AA1 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE60192C3DF2D8000F4AA1 /* Observable.swift */; };
+		B1CE601D2C3DF4C7000F4AA1 /* ProfieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CE601C2C3DF4C7000F4AA1 /* ProfieViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +96,7 @@
 		B1CE60012C3C01F9000F4AA1 /* BasketListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketListDetailViewController.swift; sourceTree = "<group>"; };
 		B1CE60032C3C251B000F4AA1 /* UINavigationBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Extension.swift"; sourceTree = "<group>"; };
 		B1CE60192C3DF2D8000F4AA1 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		B1CE601C2C3DF4C7000F4AA1 /* ProfieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfieViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 		B1642D9E2C1AF4F4003032F9 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				B1CE601B2C3DF46B000F4AA1 /* ViewModel */,
 				B1642DC62C1C1E2B003032F9 /* Cell */,
 				B1642D8D2C1AF24C003032F9 /* OnboardingViewController.swift */,
 				B1642DB72C1B0F76003032F9 /* ProfileSettingViewController.swift */,
@@ -304,6 +307,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		B1CE601B2C3DF46B000F4AA1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B1CE601C2C3DF4C7000F4AA1 /* ProfieViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -412,6 +423,7 @@
 				B1642D8C2C1AF24C003032F9 /* SceneDelegate.swift in Sources */,
 				B162AB9B2C29858A00CA46ED /* NetworkManager.swift in Sources */,
 				B1642DC32C1BF20B003032F9 /* UserDefaultManager.swift in Sources */,
+				B1CE601D2C3DF4C7000F4AA1 /* ProfieViewModel.swift in Sources */,
 				B1642E0E2C207CF0003032F9 /* UILabel+Extension.swift in Sources */,
 				B1CE5ED02C3196FC000F4AA1 /* String+Extension.swift in Sources */,
 				B1642DC82C1C1E4A003032F9 /* ProfileImageCollectionViewCell.swift in Sources */,

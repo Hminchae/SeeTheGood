@@ -11,6 +11,8 @@ import SnapKit
 
 final class ProfileImageSettingViewController: UIViewController {
     
+    var viewModel: ProfieViewModel?
+    
     var selectedImageNum: Int? = nil
     var onImageSelect: ((Int) -> Void)?
     
@@ -23,7 +25,6 @@ final class ProfileImageSettingViewController: UIViewController {
         imageView.layer.cornerRadius = 50
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "profile_\(selectedImageNum!)")
         
         return imageView
     }()
@@ -53,6 +54,17 @@ final class ProfileImageSettingViewController: UIViewController {
         view.backgroundColor = .white
         configureCollectionView()
         configureView()
+        bindData()
+    }
+    
+    private func bindData() {
+        
+        guard let viewModel else { return }
+        
+        viewModel.outputSelectedImageNum.bind { [weak self] imageName in
+            self?.profileImageView.image = UIImage(named: imageName)
+            self?.collectionView.reloadData()
+        }
     }
     
     private func configureView() {
@@ -133,26 +145,22 @@ extension ProfileImageSettingViewController: UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileImageCollectionViewCell.identifier, for: indexPath) as! ProfileImageCollectionViewCell
         
-        
-        if indexPath.row == selectedImageNum {
+        if let viewModel = viewModel {
+            
             cell.profileImage.image = UIImage(named: "profile_\(indexPath.row)")
-            cell.profileImage.alpha = 1.0
-            cell.profileImage.layer.borderColor = UIColor.point.cgColor
-            cell.profileImage.layer.borderWidth = ViewConstant.BorderWidth.selectedProfile
-        } else {
-            cell.profileImage.image = UIImage(named: "profile_\(indexPath.row)")
-            cell.profileImage.alpha = 0.5
-            cell.profileImage.layer.borderColor = UIColor.thirdGray.cgColor
-            cell.profileImage.layer.borderWidth = ViewConstant.BorderWidth.unSelectedProfile
+            cell.profileImage.alpha = indexPath.row == viewModel.inputSelectedImageNum.value ? 1.0 : 0.5
+            cell.profileImage.layer.borderColor = indexPath.row == viewModel.inputSelectedImageNum.value ? UIColor.point.cgColor : UIColor.thirdGray.cgColor
+            cell.profileImage.layer.borderWidth = indexPath.row == viewModel.inputSelectedImageNum.value ? ViewConstant.BorderWidth.selectedProfile : ViewConstant.BorderWidth.unSelectedProfile
+            
         }
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedImageNum = indexPath.row
-        collectionView.reloadData()
-        profileImageView.image = UIImage(named: "profile_\(indexPath.row)")
+        if let viewModel = viewModel {
+            viewModel.inputSelectedImageNum.value = indexPath.row
+        }
         onImageSelect?(indexPath.row)
     }
 }

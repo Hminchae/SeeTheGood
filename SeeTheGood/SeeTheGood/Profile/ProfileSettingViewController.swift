@@ -11,6 +11,7 @@ import SnapKit
 
 final class ProfileSettingViewController: UIViewController {
     
+    private let viewModel = ProfieViewModel()
     private let user = UserDefaultManager.shared
     
     var userSelectImageNum: Int?
@@ -44,7 +45,6 @@ final class ProfileSettingViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tapGesture)
-        imageView.image = UIImage(named: "profile_\(selectedImageNum)")
         
         return imageView
     }()
@@ -97,6 +97,13 @@ final class ProfileSettingViewController: UIViewController {
         configureNavigationBar()
         configureView()
         forkTwoCases()
+        bindData()
+    }
+    
+    private func bindData() {
+        viewModel.outputSelectedImageNum.bind { [weak self] imageName in
+            self?.profileImageView.image = UIImage(named: imageName)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -221,7 +228,7 @@ final class ProfileSettingViewController: UIViewController {
     
     @objc private func profileImageClicked() {
         let vc = ProfileImageSettingViewController()
-        vc.selectedImageNum = selectedImageNum
+        vc.viewModel = viewModel
         
         vc.onImageSelect = { [weak self] selectedNum in
             self?.userSelectImageNum = selectedNum
